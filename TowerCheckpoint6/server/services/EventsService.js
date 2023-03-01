@@ -1,7 +1,15 @@
 import { dbContext } from "../db/DbContext.js"
+import { BadRequest } from "../utils/Errors.js"
 
 
 class EventsService {
+    async getEventById(eventId) {
+        const event = await dbContext.Events.findById(eventId)
+        if (!event) {
+            throw new BadRequest('Invalid Event ID sorry!!')
+        }
+        return event
+    }
     async getAllEvents(query) {
         const events = await dbContext.Events.find(query)
         return events
