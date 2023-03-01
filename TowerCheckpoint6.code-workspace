@@ -8,10 +8,6 @@
     {
       "path": "TowerCheckpoint6",
       "name": "server"
-    },
-    {
-      "name": "TowerCheckpoint6",
-      "path": "."
     }
   ],
   "settings": {
