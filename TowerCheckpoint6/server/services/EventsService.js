@@ -1,10 +1,24 @@
 import { dbContext } from "../db/DbContext.js"
-import { BadRequest } from "../utils/Errors.js"
+import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 
 class EventsService {
+    async cancelEvent(eventId, requestorId) {
+        const event = await this.getEventById(eventId)
+
+        if (event.creatorId != requestorId) {
+            throw new Forbidden('You are not authorized to perform this action... It is not your event to cancel')
+        }
+        event.isCanceled = true
+        await event.save()
+        return event
+    }
     async editEvent(eventId, eventData) {
         const foundEvent = await this.getEventById(eventId)
+
+        if (foundEvent.isCanceled == true) {
+            throw new Forbidden('There is no Event to edit!!')
+        }
         foundEvent.name = eventData.name || foundEvent.name
         foundEvent.description = eventData.description || foundEvent.description
         foundEvent.coverImg = eventData.coverImg || foundEvent.coverImg
@@ -12,7 +26,6 @@ class EventsService {
         foundEvent.capacity = eventData.capacity || foundEvent.capacity
         foundEvent.startDate = eventData.startDate || foundEvent.startDate
         foundEvent.type = eventData.type || foundEvent.type
-        foundEvent.isCancelled = eventData.isCancelled != null ? eventData.isCancelled : foundEvent.isCancelled
         await foundEvent.save()
         return foundEvent
     }
