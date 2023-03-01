@@ -6,6 +6,7 @@ export class EventsController extends BaseController {
     constructor() {
         super('api/events')
         this.router
+            .get('', this.getAllEvents)
             .use(Auth0Provider.getAuthorizedUserInfo)
             .post('', this.createEvent)
 
@@ -13,9 +14,19 @@ export class EventsController extends BaseController {
 
 
     }
+    async getAllEvents(req, res, next) {
+        try {
+            const query = req.query
+            const events = await eventsService.getAllEvents(query)
+            return res.send(events)
+        } catch (error) {
+            next(error)
+        }
+    }
     async createEvent(req, res, next) {
         try {
             const eventData = req.body
+            // Null check purposes VVVV
             eventData.creatorId = req.userInfo.id
             const event = await eventsService.createEvent(eventData)
             return res.send(event)

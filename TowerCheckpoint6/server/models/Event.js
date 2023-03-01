@@ -8,7 +8,10 @@ export const EventSchema = new Schema(
         location: { type: String, required: true },
         capacity: { type: Number, required: true, min: 1, max: 1000, default: 200 },
         startDate: { type: String, required: true },
-        type: { type: String, enum: ['music', 'art', 'kid-friendly', 'theater'] }
+        type: { type: String, required: true },
+        isCancelled: { type: Boolean, default: false, required: true },
+
+        creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true }
 
 
     },

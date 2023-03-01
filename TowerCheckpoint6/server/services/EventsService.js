@@ -2,8 +2,14 @@ import { dbContext } from "../db/DbContext.js"
 
 
 class EventsService {
-    createEvent(eventData) {
-        throw new Error("Method not implemented.")
+    async getAllEvents(query) {
+        const events = await dbContext.Events.find(query)
+        return events
+    }
+    async createEvent(eventData) {
+        const event = await dbContext.Events.create(eventData)
+        return event
+
     }
 
 }
