@@ -50,6 +50,7 @@ class EventsService {
     }
     async createEvent(eventData) {
         const event = await dbContext.Events.create(eventData)
+
         return event
 
     }
