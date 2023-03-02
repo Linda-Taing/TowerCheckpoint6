@@ -3,6 +3,12 @@ import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 
 class EventsService {
+
+    async getEventComments(eventId) {
+        const comments = await dbContext.Comments.find({ eventId })
+            .populate('creator', 'name picture')
+        return comments
+    }
     async cancelEvent(eventId, requestorId) {
         const event = await this.getEventById(eventId)
 

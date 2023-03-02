@@ -22,7 +22,7 @@ export class AccountController extends BaseController {
   }
   async getMyTickets(req, res, next) {
     try {
-      const accountId = req.userInfo.Id
+      const accountId = req.userInfo.id
       const myTickets = await ticketsService.getMyTickets(accountId)
       return res.send(myTickets)
     } catch (error) {

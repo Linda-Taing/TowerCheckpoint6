@@ -1,11 +1,35 @@
 import { dbContext } from "../db/DbContext.js"
 import { eventsService } from "../services/EventsService.js"
-import { Forbidden } from "../utils/Errors.js"
+import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TicketsService {
+    async deleteTicket(ticketId, requestorId) {
+        const ticket = await dbContext.Tickets.findById(ticketId)
+        if (!ticket) {
+            throw new BadRequest('Invalid ticket')
+        }
+        if (ticket.accountId.toString() !== requestorId) {
+            throw new Forbidden('You can not delete a ticket that is not yours!')
+        }
+        await ticket.remove()
+        const event = await eventsService.getEventById(ticket.eventId)
+        event.capacity++
+        await event.save()
+        return 'No longer a ticket holder!'
+    }
+    async getEventTickets(eventId) {
+        const tickets = await dbContext.Tickets.find({ eventId }).populate('profile')
+        return tickets
+
+    }
     async getMyTickets(accountId) {
         const tickets = await dbContext.Tickets.find({ accountId })
-            .populate('profile')
+            .populate({
+                path: 'event',
+                populate: {
+                    path: 'creator',
+                }
+            })
 
         return tickets
     }
