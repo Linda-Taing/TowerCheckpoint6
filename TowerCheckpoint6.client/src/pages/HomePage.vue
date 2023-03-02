@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <h1>Tower Logo Goes Here</h1>
+</template>
 
 <script>
 export default {

@@ -1,26 +1,33 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <h1>Tower</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav ">
+              <li>
+                <!-- <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
+                  About
+                </router-link> -->
+              </li>
+            </ul>
+            <!-- LOGIN COMPONENT HERE -->
+            <Login />
+          </div>
+        </nav>
+        <router-link :to="{ name: 'Home' }" class="ms-3 mt-1 btn text-success lighten-30 selectable text-uppercase">
+          <div class="d-flex flex-column align-items-center">
+            <p>home</p>
+          </div>
+        </router-link>
+
       </div>
-    </router-link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <!-- <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link> -->
-        </li>
-      </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <Login />
     </div>
-  </nav>
+  </div>
 </template>
 
 <script>
