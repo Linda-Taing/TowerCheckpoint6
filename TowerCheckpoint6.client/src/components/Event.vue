@@ -20,10 +20,11 @@
 
 
 <script>
+import { TowerEvent } from '../models/Event.js';
 export default {
     props: {
         event: {
-            type: Event,
+            type: TowerEvent,
         }
     },
     setup() {

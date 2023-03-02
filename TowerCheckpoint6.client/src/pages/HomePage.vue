@@ -12,7 +12,7 @@
   <div class="container">
     <div class="row">
       <div class="col-10 m-auto ">
-        <div class="bg-primary rounded p-3 d-flex justify-content-around">
+        <div class="bg-secondary rounded p-3 d-flex justify-content-around">
           <button @click="changeFilterType('')" class="btn btn-outline-light">All</button>
           <button @click="changeFilterType('concerts')" class="btn btn-outline-light">Concerts</button>
           <button @click="changeFilterType('sports')" class="btn btn-outline-light">Sports</button>
