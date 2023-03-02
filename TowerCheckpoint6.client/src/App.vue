@@ -36,7 +36,7 @@ footer {
   display: grid;
   place-content: top;
   min-height: 100vh;
-  width: 10em;
+  width: 15em;
 
 }
 </style>

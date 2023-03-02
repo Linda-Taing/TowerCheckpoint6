@@ -1,6 +1,5 @@
 <template>
-  <h5>Tower Logo Goes Here</h5>
-  {{ events }}
+  <h5>Tower Logo Here! (home)</h5>
 </template>
 
 <script>

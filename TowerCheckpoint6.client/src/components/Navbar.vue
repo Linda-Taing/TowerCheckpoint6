@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-11">
-        <div class="ms-3 mt-3">
+        <div class="d-flex justify-content-center mt-3">
           <Login />
         </div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
@@ -10,7 +10,7 @@
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse mt-3" id="navbarText">
+          <div class="d-flex justify-content-center mt-3" id="navbarText">
             <ul class="navbar-nav ">
               <li>
                 <router-link :to="{ name: 'Event Details' }"
@@ -25,8 +25,8 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-11">
-          <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 mt-2">
+        <div class="col-md-11 d-flex justify-content-center">
+          <nav class=" navbar navbar-expand-lg navbar-dark bg-dark mt-3 mb-0">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
               aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -34,9 +34,32 @@
             <div class="collapse navbar-collapse" id="navbarText">
               <ul class="navbar-nav ">
                 <li>
-                  <router-link :to="{ name: 'Home' }" class=" mt-1 btn text-success lighten-30 selectable text-uppercase">
+                  <router-link :to="{ name: 'Home' }" class=" mt-3 btn text-success lighten-30 selectable text-uppercase">
                     <div class="d-flex flex-column align-items-center">
                       <p>home</p>
+                    </div>
+                  </router-link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-11 d-flex justify-content-center">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+              aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav ">
+                <li>
+                  <router-link :to="{ name: 'Account' }" class=" btn text-success lighten-30 selectable text-uppercase">
+                    <div class="list-group-item dropdown-item list-group-item-action">
+                      Account
                     </div>
                   </router-link>
                 </li>

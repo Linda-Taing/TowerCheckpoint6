@@ -1,7 +1,5 @@
 <template>
-  <div class="about">
-    <h1>This is the Events Details Page</h1>
-  </div>
+  <h5>Tower Logo here! (event deets)</h5>
 </template>
 
 <script>

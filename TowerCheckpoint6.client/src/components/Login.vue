@@ -1,26 +1,31 @@
 <template>
-  <span class="navbar-text">
-    <button class="btn btn-success lighten-30 text-uppercase my-2 my-lg-0" @click="login" v-if="!user.isAuthenticated">
+  <span class="navbar-text drop">
+    <button class=" btn btn-success lighten-30 text-uppercase my-2 my-lg-0" @click="login" v-if="!user.isAuthenticated">
       Login
     </button>
     <div v-else>
       <div class="dropdown dropstart my-4 my-lg-0">
         <div type="button" class="bg-dark border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false"
-          title="For More Options click here.">
+          title="For More Account Information click here.">
           <div v-if="account.picture || user.picture">
             <img :src="account.picture || user.picture" alt="account photo" height="100" width="100" class="square" />
           </div>
         </div>
-        <div class="dropdown-menu dropdown-menu-lg-left p-0" aria-labelledby="authDropdown">
+        <div class="dropdown-menu dropdown-menu-lg-left mt-5 offset-e-5 p-0" aria-labelledby="authDropdown">
           <div class="list-group">
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item dropdown-item list-group-item-action">
-                Manage Account
+            <div class="col-md-12">
+              <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
+                <i class="mdi mdi-logout"></i>
+                logout
               </div>
-            </router-link>
-            <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
-              <i class="mdi mdi-logout"></i>
-              logout
+              <div>
+                <button class="w-100 border selectable edit  p-2 rounded-top text-center border-0" data-bs-toggle="modal"
+                  data-bs-target="#test-modal" @click="showModal = true">
+                  Edit Profile Picture
+                </button>
+                <Modal id="test-modal" modal-title="Edit Profile Picture">
+                </Modal>
+              </div>
             </div>
           </div>
         </div>
@@ -49,4 +54,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.edit {
+  color: blue
+}
+
+.drop {
+  margin-top: 3em;
+}
+</style>
