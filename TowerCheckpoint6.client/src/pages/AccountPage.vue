@@ -5,10 +5,25 @@
 <script>
 import { computed } from 'vue'
 import { AppState } from '../AppState'
+import Pop from '../utils/Pop.js'
 export default {
   setup() {
     return {
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      async getMyTickets() {
+        try {
+
+
+        } catch (error) {
+          Pop.error(error)
+        }
+      }
+
+
+
+
+
+      //NOTE do not crossVVVV end of Return//
     }
   }
 }

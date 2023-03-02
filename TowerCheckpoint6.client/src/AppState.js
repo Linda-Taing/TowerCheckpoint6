@@ -8,14 +8,14 @@ export const AppState = reactive({
   /** @type {import('./models/TowerEvent.js').TowerEvent[]} */
   events: [],
   /** @type {import('./models/TowerEvent.js').TowerEvent | null} */
-  CurrentEvent: null,
+  currentEvent: null,
   /** @type {import('./models/Comment.js').Comment | null} */
   comments: [],
   /** @type {import('./models/Comment.js').Comment[]} */
-  CurrentComment: [],
+  currentComment: [],
   /** @type {import('./models/.Attendee.js').Attendee[]} */
-  Attendees: [],
+  attendees: [],
   /** @type {import('./models/Attendee.js').Attendee|null} */
-  Attendee: null
+  attendee: null
 
 })

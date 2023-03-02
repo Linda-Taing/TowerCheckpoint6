@@ -19,9 +19,11 @@ class EventsService {
         await event.save()
         return event
     }
-    async editEvent(eventId, eventData) {
+    async editEvent(eventId, eventData, requestorId) {
         const foundEvent = await this.getEventById(eventId)
-
+        if (foundEvent.creatorId != requestorId) {
+            throw new Forbidden('You cannot do this')
+        }
         if (foundEvent.isCanceled == true) {
             throw new Forbidden('There is no Event to edit!!')
         }

@@ -38,6 +38,9 @@ class TicketsService {
         if (event.isCanceled == true) {
             throw new Forbidden('Tickets cannot be bought for events that do not exist!')
         }
+        if (event.capacity == 0) {
+            throw new BadRequest('Sorry Event is Sold Out!')
+        }
         const ticket = await dbContext.Tickets.create(ticketData)
         await ticket.populate('profile')
         const foundEvent = await eventsService.getEventById(ticketData.eventId)
