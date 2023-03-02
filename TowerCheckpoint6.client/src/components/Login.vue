@@ -5,10 +5,10 @@
     </button>
     <div v-else>
       <div class="dropdown dropstart my-4 my-lg-0">
-        <div type="button" class="bg-dark border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false">
+        <div type="button" class="bg-dark border-0 selectable no-select" data-bs-toggle="dropdown" aria-expanded="false"
+          title="For More Options click here.">
           <div v-if="account.picture || user.picture">
-            <img :src="account.picture || user.picture" alt="account photo" height="60" width="60"
-              class="rounded-circle" />
+            <img :src="account.picture || user.picture" alt="account photo" height="100" width="100" class="square" />
           </div>
         </div>
         <div class="dropdown-menu dropdown-menu-lg-left p-0" aria-labelledby="authDropdown">

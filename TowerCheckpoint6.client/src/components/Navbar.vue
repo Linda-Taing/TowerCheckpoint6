@@ -1,30 +1,49 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-11">
+        <div class="ms-3 mt-3">
+          <Login />
+        </div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarText">
+          <div class="collapse navbar-collapse mt-3" id="navbarText">
             <ul class="navbar-nav ">
               <li>
-                <!-- <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-                  About
-                </router-link> -->
+                <router-link :to="{ name: 'Event Details' }"
+                  class="btn text-success lighten-30 selectable text-uppercase">
+                  Event Details
+                </router-link>
               </li>
             </ul>
-            <!-- LOGIN COMPONENT HERE -->
-            <Login />
           </div>
         </nav>
-        <router-link :to="{ name: 'Home' }" class="ms-3 mt-1 btn text-success lighten-30 selectable text-uppercase">
-          <div class="d-flex flex-column align-items-center">
-            <p>home</p>
-          </div>
-        </router-link>
-
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-11">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 mt-2">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+              aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav ">
+                <li>
+                  <router-link :to="{ name: 'Home' }" class=" mt-1 btn text-success lighten-30 selectable text-uppercase">
+                    <div class="d-flex flex-column align-items-center">
+                      <p>home</p>
+                    </div>
+                  </router-link>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
       </div>
     </div>
   </div>
