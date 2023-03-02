@@ -1,15 +1,15 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="card Ecard ">
-                <img class="" :src="event.coverImg" :alt="event.name">
-                {{ event.name }}
-                {{ event.startDate }}
-                {{ event.location }}
-                {{ event.capacity }}
-            </div>
-        </div>
+    <!-- <div class="container">
+        <div class="row"> -->
+    <div class="card Ecard ">
+        <img class="" :src="event.coverImg" :alt="event.name">
+        {{ event.name }}
+        {{ event.startDate }}
+        {{ event.location }}
+        {{ event.capacity }}
     </div>
+    <!-- </div>
+    </div> -->
 </template>
 
 

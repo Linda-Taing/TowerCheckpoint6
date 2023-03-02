@@ -1,9 +1,29 @@
 <template>
   <h5>Tower Logo Here! (home)</h5>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <h2>Events </h2>
+        <img class="img-fluid cover"
+          src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uY2VydHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+          alt="" srcset="">
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-10 m-auto">
+        <div class="bg-primary rounded p-3 d-flex justify-content-around">
+          <button @click="changeFilterType('')" class="btn btn-outline-light">All</button>
+          <button @click="changeFilterType('concerts')" class="btn btn-outline-light">Concerts</button>
+          <button @click="changeFilterType('sports')" class="btn btn-outline-light">Sports</button>
+          <button @click="changeFilterType('digital')" class="btn btn-outline-light">Digital</button>
+          <button @click="changeFilterType('convention')" class="btn btn-outline-light">Convention</button>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <h2>Events </h2>
+        </div>
       </div>
       <div v-for="eve in events" class="col-md-3">
         <Event :event="eve" />
@@ -16,11 +36,12 @@
 import Pop from '../utils/Pop.js';
 import { eventsService } from '../services/EventsService.js'
 import { logger } from '../utils/Logger.js';
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 import { AppState } from '../AppState.js';
 
 export default {
   setup() {
+    const filterType = ref('')
     async function getAllEvents() {
       try {
         await eventsService.getAllEvents();
@@ -33,7 +54,19 @@ export default {
       getAllEvents();
     })
     return {
-      events: computed(() => AppState.events)
+      events: computed(() => {
+        if (!filterType.value) {
+          return AppState.events
+        }
+        else {
+          return AppState.events.filter(e => e.type == filterType.value)
+        }
+      }),
+      changeFilterType(type) {
+        filterType.value = type
+      }
+
+
 
       // ---Do Not Pass --- End of Return VVVV //
     }
@@ -41,4 +74,12 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.cover {
+  height: 20em;
+  width: 100%;
+  object-fit: cover;
+
+
+}
+</style>
