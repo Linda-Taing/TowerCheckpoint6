@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <img class="img-fluid cover"
+        <img class="img-fluid cover mb-4"
           src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29uY2VydHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
           alt="" srcset="">
       </div>
@@ -11,7 +11,7 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-10 m-auto">
+      <div class="col-10 m-auto ">
         <div class="bg-primary rounded p-3 d-flex justify-content-around">
           <button @click="changeFilterType('')" class="btn btn-outline-light">All</button>
           <button @click="changeFilterType('concerts')" class="btn btn-outline-light">Concerts</button>

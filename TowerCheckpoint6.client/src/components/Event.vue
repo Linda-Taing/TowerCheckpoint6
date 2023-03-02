@@ -1,12 +1,18 @@
 <template>
     <!-- <div class="container">
         <div class="row"> -->
-    <div class="card Ecard ">
+    <div class="card Ecard my-2 ">
         <img class="" :src="event.coverImg" :alt="event.name">
-        {{ event.name }}
-        {{ event.startDate }}
-        {{ event.location }}
-        {{ event.capacity }}
+        <div class="card-body">
+            <p>{{ event.name }}</p>
+            <p>{{ event.startDate }}</p>
+            <p> {{ event.location }}</p>
+            <p>{{ event.capacity }}</p>
+
+
+
+
+        </div>
     </div>
     <!-- </div>
     </div> -->
