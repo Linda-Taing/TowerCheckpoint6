@@ -1,28 +1,30 @@
 <template>
     <!-- <div class="container">
         <div class="row"> -->
-    <div class="selectable card Ecard my-2 ">
-        <img class="" :src="event.coverImg" :alt="event.name">
-        <div class="card-body">
-            <p>{{ event.name }}</p>
-            <p>{{ event.startDate }}</p>
-            <p> {{ event.location }}</p>
-            <p>{{ event.capacity }}</p>
-            <button class="btn btn-danger">Cancel Event
-            </button>
-
-
-
-
+    <router-link :to="{ name: 'EventDetails', params: { eventId: event.id } }">
+        <div class="selectable card Ecard my-2 ">
+            <img class="img-fluid" :src="event.coverImg" :alt="event.name">
+            <div class="card-body">
+                <p>{{ event.name }}</p>
+                <p>{{ event.startDate }}</p>
+                <p> {{ event.location }}</p>
+                <p>{{ event.capacity }}</p>
+                <button class="btn btn-danger">Cancel Event
+                </button>
+            </div>
         </div>
-    </div>
+
+    </router-link>
+
+
     <!-- </div>
     </div> -->
 </template>
 
 
 <script>
-import { TowerEvent } from '../models/Event.js';
+import { TowerEvent } from '../models/TowerEvent.js';
+import { useRoute } from 'vue-router';
 export default {
     props: {
         event: {
@@ -30,7 +32,9 @@ export default {
         }
     },
     setup() {
-        return {}
+        const route = useRoute()
+        return {
+        }
     }
 }
 </script>

@@ -66,7 +66,7 @@ export default {
                     const towerEvent = await eventsService.createEvent(formData)
                     editable.value = {}
                     if (towerEvent?.id) {
-                        router.push({ name: 'Event Details', params: { eventId: towerEvent.id } })
+                        router.push({ name: 'EventDetails', params: { eventId: towerEvent.id } })
                     }
                 } catch (error) {
                     Pop.error(error)

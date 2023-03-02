@@ -1,7 +1,7 @@
 import { api } from "./AxiosService.js"
 import { logger } from "../utils/Logger.js"
 import { AppState } from "../AppState.js"
-import { TowerEvent } from "../models/Event.js"
+import { TowerEvent } from "../models/TowerEvent.js"
 
 
 class EventsService {
