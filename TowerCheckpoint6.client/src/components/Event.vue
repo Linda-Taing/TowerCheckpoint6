@@ -1,7 +1,7 @@
 <template>
     <!-- <div class="container">
         <div class="row"> -->
-    <div class="card Ecard my-2 ">
+    <div class="selectable card Ecard my-2 ">
         <img class="" :src="event.coverImg" :alt="event.name">
         <div class="card-body">
             <p>{{ event.name }}</p>

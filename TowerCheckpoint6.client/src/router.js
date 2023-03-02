@@ -12,7 +12,7 @@ const routes = [
     component: loadPage('HomePage')
   },
   {
-    path: '/eventdetails',
+    path: '/eventdetails/:eventId',
     name: 'Event Details',
     component: loadPage('EventDetails')
   },

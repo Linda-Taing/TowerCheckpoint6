@@ -16,9 +16,10 @@ class EventsService {
     }
 
     async createEvent(formData) {
-        const res = await api.post('api/albums', formData)
+        const res = await api.post('api/events', formData)
         logger.log('[CREATING EVENT]', res.data)
         AppState.events = new TowerEvent(res.data)
+        return res.data
 
     }
 

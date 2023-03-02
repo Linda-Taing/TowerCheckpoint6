@@ -1,5 +1,14 @@
 <template>
-  <h5>Tower Logo Here! (home)</h5>
+  <div class="p-2 d-flex justify-content-between">
+    <h5>Tower Logo Here! (home)</h5>
+    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#test-modal">
+      Create Event
+    </button>
+
+  </div>
+  <Modal id="test-modal" modal-title="Create Event">
+    <createEvent />
+  </Modal>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">

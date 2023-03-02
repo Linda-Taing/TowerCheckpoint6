@@ -20,10 +20,10 @@
               </div>
               <div>
                 <button class="w-100 border selectable edit  p-2 rounded-top text-center border-0" data-bs-toggle="modal"
-                  data-bs-target="#test-modal" @click="showModal = true">
+                  data-bs-target="#editProfile" @click="showModal = true">
                   Edit Profile Picture
                 </button>
-                <Modal id="test-modal" modal-title="Edit Profile Picture">
+                <Modal id="editProfile" modal-title="Edit Profile Picture">
                 </Modal>
               </div>
             </div>

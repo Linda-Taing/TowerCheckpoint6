@@ -5,7 +5,8 @@
         <div class="d-flex justify-content-center mt-3">
           <Login />
         </div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+        <!-- NOTE do not need this as a client choosing page. -->
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -20,7 +21,7 @@
               </li>
             </ul>
           </div>
-        </nav>
+        </nav> -->
       </div>
     </div>
     <div class="container">
@@ -73,10 +74,35 @@
 </template>
 
 <script>
+import { AppState } from '../AppState.js';
 import Login from './Login.vue'
+import { ref } from 'vue';
+import { computed } from 'vue';
+import { router } from '../router.js';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
+import { eventsService } from '../services/EventsService.js';
+
 export default {
   setup() {
-    return {}
+    const editable = ref({})
+    return {
+      editable,
+      events: computed(() => AppState.events),
+
+      async createEvent() {
+        try {
+          const formData = editable.value
+          await eventsService.createEvent(formData)
+          editable.value = {}
+          router.push({ name: 'Events Page', params: { eventId: TowerEvent.id } })
+        } catch (error) {
+          logger.log(error)
+          Pop.error(error)
+        }
+      },
+      //NOTE do not go below end of return VVV//
+    }
   },
   components: { Login }
 }
