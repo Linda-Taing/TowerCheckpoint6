@@ -1,12 +1,12 @@
 <template>
   <header>
-    <Navbar />
+
   </header>
   <main>
     <router-view />
   </main>
-   <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
+  <footer>
+    <Navbar />
   </footer>
 </template>
 
@@ -27,14 +27,16 @@ export default {
 <style lang="scss">
 @import "./assets/scss/main.scss";
 
-:root{
+:root {
   --main-height: calc(100vh - 32px - 64px);
 }
 
 
 footer {
   display: grid;
-  place-content: center;
-  height: 32px;
+  place-content: top;
+  min-height: 100vh;
+  width: 15em;
+
 }
 </style>
