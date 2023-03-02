@@ -7,7 +7,7 @@
         </div>
         <!-- NOTE hide later when turning in project -->
         <!-- NOTE do not need this as a client choosing page. -->
-        <div>
+        <!-- <div>
           <div>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -26,7 +26,7 @@
               </div>
             </nav>
           </div>
-        </div>
+        </div> -->
         <div class="container">
           <div class="row">
             <div class="col-md-11 d-flex justify-content-center">
