@@ -5,68 +5,75 @@
         <div class="d-flex justify-content-center mt-3">
           <Login />
         </div>
+        <!-- NOTE hide later when turning in project -->
         <!-- NOTE do not need this as a client choosing page. -->
-        <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="d-flex justify-content-center mt-3" id="navbarText">
-            <ul class="navbar-nav ">
-              <li>
-                <router-link :to="{ name: 'Event Details' }"
-                  class="btn text-success lighten-30 selectable text-uppercase">
-                  Event Details
-                </router-link>
-              </li>
-            </ul>
+        <div>
+          <div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="d-flex justify-content-center mt-3" id="navbarText">
+                <ul class="navbar-nav ">
+                  <li>
+                    <router-link :to="{ name: 'Event Details' }"
+                      class="btn text-success lighten-30 selectable text-uppercase">
+                      Event Details
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
+            </nav>
           </div>
-        </nav> -->
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-11 d-flex justify-content-center">
-          <nav class=" navbar navbar-expand-lg navbar-dark bg-dark mt-3 mb-0">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-              aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav ">
-                <li>
-                  <router-link :to="{ name: 'Home' }" class=" mt-3 btn text-success lighten-30 selectable text-uppercase">
-                    <div class="d-flex flex-column align-items-center">
-                      <p>home</p>
-                    </div>
-                  </router-link>
-                </li>
-              </ul>
-            </div>
-          </nav>
         </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-11 d-flex justify-content-center">
-          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-              aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav ">
-                <li>
-                  <router-link :to="{ name: 'Account' }" class=" btn text-success lighten-30 selectable text-uppercase">
-                    <div class="list-group-item dropdown-item list-group-item-action">
-                      Account
-                    </div>
-                  </router-link>
-                </li>
-              </ul>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-11 d-flex justify-content-center">
+              <nav class=" navbar navbar-expand-lg navbar-dark bg-dark mt-3 mb-0">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                  aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                  <ul class="navbar-nav ">
+                    <li>
+                      <router-link :to="{ name: 'Home' }"
+                        class=" mt-3 btn text-success lighten-30 selectable text-uppercase">
+                        <div class="d-flex flex-column align-items-center">
+                          <p>home</p>
+                        </div>
+                      </router-link>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
             </div>
-          </nav>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-11 d-flex justify-content-center">
+              <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                  aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                  <ul class="navbar-nav ">
+                    <li>
+                      <router-link :to="{ name: 'Account' }"
+                        class=" btn text-success lighten-30 selectable text-uppercase">
+                        <div class="list-group-item dropdown-item list-group-item-action">
+                          Account
+                        </div>
+                      </router-link>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
         </div>
       </div>
     </div>

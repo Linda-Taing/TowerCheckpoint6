@@ -8,6 +8,8 @@
             <p>{{ event.startDate }}</p>
             <p> {{ event.location }}</p>
             <p>{{ event.capacity }}</p>
+            <button class="btn btn-danger">Cancel Event
+            </button>
 
 
 
