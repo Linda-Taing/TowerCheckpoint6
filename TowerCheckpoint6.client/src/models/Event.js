@@ -1,4 +1,4 @@
-export class Album {
+export class Event {
     constructor(data) {
         this.id = data.id
         this.isCanceled = data.isCanceled

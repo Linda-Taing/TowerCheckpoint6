@@ -1,5 +1,15 @@
 <template>
   <h5>Tower Logo Here! (home)</h5>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Events </h2>
+      </div>
+      <div v-for="eve in events" class="col-md-3">
+        <Event :event="eve" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
