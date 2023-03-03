@@ -13,6 +13,16 @@ class AttendeesService {
         logger.log('creating ticket', res.data)
     }
 
+    async deleteTicket(attendeeId) {
+        const res = await api.delete(`api/tickets/${attendeeId}`)
+        debugger
+        logger.log('[DELETING TICKET]', res.data)
+        const ticketIndex = AppState.attendees.findIndex(t => t.attendeeId == attendeeId)
+        if (attendee !== -1) {
+            AppState.attendees.splice(ticketIndex, 1)
+        }
+    }
+
 
 }
 

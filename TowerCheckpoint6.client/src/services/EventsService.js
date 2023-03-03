@@ -14,6 +14,11 @@ class EventsService {
         console.log(AppState.events);
 
     }
+    async getEventById(eventId) {
+        const res = await api.get(`api/events/`, eventId)
+        logger.log('[Events by ID in the service]', res.data)
+        const events = res.data.map(e => new TowerEvent(e))
+    }
 
     async createEvent(formData) {
         const res = await api.post('api/events', formData)

@@ -1,7 +1,7 @@
 <template>
   <div class="p-2 d-flex justify-content-between">
     <h5>Tower Logo Here! (home)</h5>
-    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#test-modal">
+    <button v-if="account.id" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#test-modal">
       Create Event
     </button>
 
@@ -47,9 +47,11 @@ import { eventsService } from '../services/EventsService.js'
 import { logger } from '../utils/Logger.js';
 import { onMounted, computed, ref } from 'vue';
 import { AppState } from '../AppState.js';
+import { useRoute } from 'vue-router';
 
 export default {
   setup() {
+    const route = useRoute()
     const filterType = ref('')
     async function getAllEvents() {
       try {
@@ -59,10 +61,21 @@ export default {
         Pop.error(error, '[GETTING ALL EVENTS]');
       }
     }
+    async function getEventById() {
+      try {
+        const eventId = route.params.eventId
+        await eventsService.getEventById(eventId);
+      } catch (error) {
+        Pop.error(error, '[GETTING EVENT BY ID]')
+
+      }
+    }
     onMounted(() => {
       getAllEvents();
+      getEventById();
     })
     return {
+      account: computed(() => AppState.account),
       events: computed(() => {
         if (!filterType.value) {
           return AppState.events
@@ -70,6 +83,7 @@ export default {
         else {
           return AppState.events.filter(e => e.type == filterType.value)
         }
+
       }),
       changeFilterType(type) {
         filterType.value = type
