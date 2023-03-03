@@ -9,6 +9,7 @@
             <p>{{ event?.startDate }}</p>
             <p> {{ event?.location }}</p>
             <p>{{ event?.capacity }}</p>
+            {{ event?.comments }}
         </div>
     </div>
     <!-- </router-link> -->

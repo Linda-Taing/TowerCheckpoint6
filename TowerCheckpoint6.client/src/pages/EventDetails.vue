@@ -1,12 +1,45 @@
 <template>
   <h5>Tower Logo here on the Deets Page</h5>
 
-  <button @click="cancelEvent()" class="btn btn-danger">Remove Event</button>
   <div v-if="event" class="container">
     <div class="row">
       <div class="col-md-12 card">
-        <img :src="event?.coverImg" alt="">
-        {{ event?.name }}
+        <div class="card-title">
+          <h2>{{ event?.name }}</h2>
+        </div>
+        <img class="pic p-2 " :src="event?.coverImg" alt="">
+        <!-- <div class="d-flex justify-content-end p-2">
+          <div v-if="account.id && ticket.id" class="d-flex justify-content-end p-2">
+          <button @click="cancelEvent()" class="btn btn-danger w-25 ">Remove Event</button>
+        </div> -->
+        <p>Date of event: {{ event?.startDate }}</p>
+        <p>Type of event: {{ event?.type }}</p>
+        <p class="fw-bold pb-0">Description:
+        <p class="pt-0">{{ event?.description }}</p>
+        </p>
+
+        <p class="fw-bold">capacity: {{ event?.capacity }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Who is attending?:</h1>
+      </div>
+    </div>
+  </div>
+
+  (space between)
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 card ">
+        <h1>Comments:</h1>
+        <p>{{ comment?.name }}</p>
+        <p>{{ comment?.picture }}</p>
+        <p>{{ comments?.body }} </p>
+
+
       </div>
     </div>
   </div>
@@ -57,7 +90,7 @@ export default {
       getEventById();
     });
     return {
-
+      account: computed(() => AppState.account),
       comments: computed(() => AppState.comments),
       event: computed(() => AppState.currentEvent),
 
@@ -88,4 +121,11 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+
+<style lang="scss" scoped>
+.pic {
+  height: 50vh;
+  width: 100%;
+  object-fit: cover;
+}
+</style>

@@ -1,32 +1,25 @@
 <template>
-    <div class="component">
-
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {{ comments }}
+            </div>
+        </div>
     </div>
 </template>
 
 
 <script>
-import { onMounted } from 'vue';
-import Pop from '../utils/Pop.js';
-import { useRoute } from 'vue-router';
 
 export default {
+    props: {
+        comment: {
+            type: Comment,
+        }
+    },
 
     setup() {
-        async function getEventComments() {
-            try {
-                const eventId = route.params.eventId
-                await commentsService.getEventComments(eventId);
-            }
-            catch (error) {
-                Pop.error(error, '[GETTING EVENT COMMENTS]')
-            }
-        }
-        onMounted(() => {
-            getEventComments();
-        });
-        const route = useRoute();
+
         return {
 
 
