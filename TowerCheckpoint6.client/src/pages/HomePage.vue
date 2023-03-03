@@ -62,18 +62,9 @@ export default {
         Pop.error(error, '[GETTING ALL EVENTS]');
       }
     }
-    async function getEventById() {
-      try {
-        const currentEventId = route.params.currentEventId
-        await eventsService.getEventById(currentEventId);
-      } catch (error) {
-        Pop.error(error, '[GETTING EVENT BY ID]')
 
-      }
-    }
     onMounted(() => {
       getAllEvents();
-      getEventById();
     })
     return {
       account: computed(() => AppState.account),
@@ -88,16 +79,7 @@ export default {
       changeFilterType(type) {
         filterType.value = type
       },
-      async cancelEvent(eventId) {
-        try {
-          if (await Pop.confirm('Are you sure you want to delete this event?')) {
-            await eventsService.cancelEvent(eventId);
-          }
-        } catch (error) {
-          logger.log(error);
-          Pop.error(error.message);
-        }
-      }
+
 
 
 

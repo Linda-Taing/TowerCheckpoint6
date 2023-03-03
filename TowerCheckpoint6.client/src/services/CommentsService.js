@@ -10,12 +10,12 @@ class CommentsService {
         AppState.comments = comments
     }
 
-    async getEventCommentsById(commentId) {
+    async deleteEventCommentsById(commentId) {
 
-        const res = await api.get(`api/comments/${commentId}`)
+        const res = await api.delete(`api/comments/${commentId}`)
         logger.log('[Comments By Id in the Service]', res.data)
         const comments = res.data.map(c => new Comment(c))
-        AppState.comments = currentComment
+
     }
 
 }
