@@ -1,11 +1,15 @@
 import { Attendee } from "../models/Attendee.js"
 import { api } from "./AxiosService.js"
 import { AppState } from "../AppState.js"
+import { logger } from "../utils/Logger.js"
+import { Ticket } from "../models/Ticket.js"
+
 
 class AttendeesService {
     async getMyTickets() {
         const res = await api.get('account/tickets')
-        const tickets = res.data.map(t => new Attendee(t))
+        logger.log('[Getting my tickets]', res.data)
+        const tickets = res.data.map(t => new Ticket(t))
         AppState.tickets = tickets
     }
     async createTicket() {

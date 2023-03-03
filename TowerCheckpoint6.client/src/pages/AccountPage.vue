@@ -1,20 +1,30 @@
 <template>
   <h5>Tower Logo Here! (acct)</h5>
   <button @click="deleteTicket()" class="btn btn-danger p-2">Delete ticket!</button>
+
+
+  <div class="container">
+    <div class="row">
+      <div v-for=" tick in tickets" class="col">
+        {{ tickets }}
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
-import { Attendee } from '../models/Attendee.js'
-import { TowerEvent } from '../models/TowerEvent.js'
 import { attendeesService } from '../services/AttendeesService.js'
 import { logger } from '../utils/Logger.js'
 import Pop from '../utils/Pop.js'
+import { Ticket } from '../models/Ticket.js'
+
+
 export default {
   props: {
-    attendee: {
-      type: Attendee,
+    tickets: {
+      type: Ticket,
     }
   },
 
@@ -31,8 +41,9 @@ export default {
       getMyTickets();
     });
     return {
+      attendees: computed(() => AppState.attendees),
       account: computed(() => AppState.account),
-      tickets: computed(() => AppState.attendees),
+      tickets: computed(() => AppState.tickets),
 
       async createTicket() {
         try {
