@@ -33,12 +33,15 @@
   (space between)
   <div class="container">
     <div class="row">
-      <div class="col-md-12 card ">
+      <div v-for="comment in comments" class="col-md-12">
         <h1>Comments:</h1>
-        <p>{{ comment?.name }}</p>
-        <p>{{ comment?.picture }}</p>
-        <p>{{ comments?.body }} </p>
-
+        <div class="card rounded-0">
+          <p>Comment:</p>
+          <p>{{ comment?.creator.name }}</p>
+          <img class="rounded-circle" height="100" width="100" :src="comment.creator.picture" alt="">
+          <p>{{ comment?.body }} </p>
+          <button @click="deleteEventCommentsById()" class="btn btn-danger w-50">Delete Comment</button>
+        </div>
 
       </div>
     </div>
@@ -104,10 +107,12 @@ export default {
           Pop.error(error.message);
         }
       },
-      async deleteEventCommentsById() {
+      async deleteEventCommentsById(commentId, creatorId) {
         try {
-          const commentId = route.params.commentId;
-          await commentsService.deleteEventCommentsById(commentId);
+          if (await Pop.confirm('Are you sure you want to delete this comment?')) {
+            const commentId = route.params.comments.creatorId;
+            await commentsService.deleteEventCommentsById(commentId);
+          }
         }
         catch (error) {
           logger.log("[comments with IDs]");

@@ -5,7 +5,6 @@
 
 <script>
 import { computed, onMounted } from 'vue'
-import { routeLocationKey } from 'vue-router'
 import { AppState } from '../AppState'
 import { Attendee } from '../models/Attendee.js'
 import { TowerEvent } from '../models/TowerEvent.js'

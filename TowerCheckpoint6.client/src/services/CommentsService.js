@@ -11,11 +11,14 @@ class CommentsService {
         AppState.comments = comments
     }
 
-    async deleteEventCommentsById(commentId) {
+    async deleteEventCommentsById(commentId, creatorId) {
 
         const res = await api.delete(`api/comments/${commentId}`)
         logger.log('[Comments By Id in the Service]', res.data)
-        const comments = res.data.map(c => new Comment(c))
+        const commentIndex = AppState.comments.findIndex(c => c.commentId == commentId)
+        if (commentId !== -1) {
+            AppState.comments.splice(commentIndex, 1)
+        }
 
     }
 
