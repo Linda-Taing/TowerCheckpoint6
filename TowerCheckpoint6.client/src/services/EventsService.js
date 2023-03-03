@@ -25,9 +25,18 @@ class EventsService {
         logger.log('[CREATING EVENT]', res.data)
         AppState.events = new TowerEvent(res.data)
         return res.data
-
     }
 
+    async cancelEvent(eventId) {
+        const res = await api.delete(`api/events/${eventId}`)
+
+        logger.log('[CANCELLING EVENT]', res.data)
+        const eventIndex = AppState.events.findIndex(e => e.eventId == eventId)
+        if (eventId !== -1) {
+            AppState.events.splice(eventIndex, 1)
+        }
+
+    }
 
 }
 export const eventsService = new EventsService()

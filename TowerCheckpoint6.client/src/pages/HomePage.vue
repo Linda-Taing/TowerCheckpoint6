@@ -1,6 +1,7 @@
 <template>
   <div class="p-2 d-flex justify-content-between">
     <h5>Tower Logo Here! (home)</h5>
+    <button @click="cancelEvent()" class="btn btn-danger">Remove Event</button>
     <button v-if="account.id" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#test-modal">
       Create Event
     </button>
@@ -83,10 +84,19 @@ export default {
         else {
           return AppState.events.filter(e => e.type == filterType.value)
         }
-
       }),
       changeFilterType(type) {
         filterType.value = type
+      },
+      async cancelEvent(eventId) {
+        try {
+          if (await Pop.confirm('Are you sure you want to delete this event?')) {
+            await eventsService.cancelEvent(eventId);
+          }
+        } catch (error) {
+          logger.log(error);
+          Pop.error(error.message);
+        }
       }
 
 
