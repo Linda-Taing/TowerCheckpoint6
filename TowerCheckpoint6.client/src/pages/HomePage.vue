@@ -64,8 +64,8 @@ export default {
     }
     async function getEventById() {
       try {
-        const eventId = route.params.eventId
-        await eventsService.getEventById(eventId);
+        const currentEventId = route.params.currentEventId
+        await eventsService.getEventById(currentEventId);
       } catch (error) {
         Pop.error(error, '[GETTING EVENT BY ID]')
 

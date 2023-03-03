@@ -17,7 +17,8 @@ class EventsService {
     async getEventById(eventId) {
         const res = await api.get(`api/events/`, eventId)
         logger.log('[Events by ID in the service]', res.data)
-        const events = res.data.map(e => new TowerEvent(e))
+        const currentEvent = res.data.map(e => new TowerEvent(e))
+        AppState.events = currentEvent
     }
 
     async createEvent(formData) {
