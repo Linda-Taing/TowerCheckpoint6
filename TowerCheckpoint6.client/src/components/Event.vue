@@ -9,11 +9,8 @@
                 <p>{{ event.startDate }}</p>
                 <p> {{ event.location }}</p>
                 <p>{{ event.capacity }}</p>
-                <button class="btn btn-danger">Cancel Event
-                </button>
             </div>
         </div>
-
     </router-link>
 
 
@@ -25,15 +22,27 @@
 <script>
 import { TowerEvent } from '../models/TowerEvent.js';
 import { useRoute } from 'vue-router';
+import { eventsService } from '../services/EventsService.js';
+import { AppState } from '../AppState.js';
+import { computed } from 'vue';
 export default {
     props: {
         event: {
             type: TowerEvent,
         }
     },
-    setup() {
+    setup(props) {
         const route = useRoute()
         return {
+            //this function is going to set current event in appSTate. and its going to router.push to event Details. 
+            currentEvent: computed(() => AppState.currentEvent),
+            setCurrentEvent() {
+                console.log(props);
+                eventsService.setCurrentEvent(props.event)
+            },
+
+
+            //-----NOTE end of return----------//
         }
     }
 }
