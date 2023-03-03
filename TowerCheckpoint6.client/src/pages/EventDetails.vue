@@ -36,13 +36,26 @@
       <div v-for="comment in comments" class="col-md-12">
         <h1>Comments:</h1>
         <div class="card rounded-0">
-          <p>Comment:</p>
-          <p>{{ comment?.creator.name }}</p>
-          <img class="rounded-circle" height="100" width="100" :src="comment.creator.picture" alt="">
-          <p>{{ comment?.body }} </p>
-          <button @click="deleteEventCommentsById()" class="btn btn-danger w-50">Delete Comment</button>
+          <div class="mb-3 col-10 ms-5 ">
+            <label for="exampleFormControlInput1" class="p-2 fw-bold form-label">Add Comment Here:</label>
+            <input type="email" class="mt-1 form-control" id="exampleFormControlInput1"
+              placeholder="Your thoughts here!!">
+            <div @click="createComment()" class="d-flex justify-content-end">
+              <button class="btn btn-success p-1 mt-3 ">Add Comment</button>
+            </div>
+          </div>
+          <div>
+            <div class="mt-3 p-2 card rounded-0">
+              <img class="p-3 rounded-circle" title="Profile Picture" height="100" width="100"
+                :src="comment.creator.picture" alt="">
+              <p class="p-3">{{ comment?.creator.name }}</p>
+              <p class="ms-3">{{ comment?.body }} </p>
+              <div class="d-flex justify-content-end">
+                <button @click="deleteEventCommentsById()" class="btn btn-danger ms-3">Delete Comment</button>
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -50,7 +63,7 @@
 
 <script>
 import { useRoute } from 'vue-router';
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 import Pop from '../utils/Pop.js';
 import { commentsService } from '../services/CommentsService.js';
 import { logger } from '../utils/Logger.js';
@@ -67,6 +80,7 @@ export default {
   },
 
   setup() {
+    const editable = ref({})
     const route = useRoute();
 
     async function getEventById() {
@@ -93,6 +107,7 @@ export default {
       getEventById();
     });
     return {
+      editable,
       account: computed(() => AppState.account),
       comments: computed(() => AppState.comments),
       event: computed(() => AppState.currentEvent),
@@ -117,6 +132,16 @@ export default {
         catch (error) {
           logger.log("[comments with IDs]");
           Pop.error(error);
+        }
+      },
+      async createComment() {
+        try {
+          const formData = editable.value
+          const creatorId =
+            await commentsService.createComment(formData)
+          editable.value = {}
+        } catch (error) {
+          Pop.error(error)
         }
       }
       // ---Do not pass-- VVVVV End Of Return //

@@ -10,7 +10,11 @@ class CommentsService {
         const comments = res.data.map(c => new Comment(c))
         AppState.comments = comments
     }
-
+    async createComment(formData) {
+        const res = await api.post('api/comments', formData)
+        logger.log('[CREATING COMMENT]', res.data)
+        AppState.comments = new Comment(res.data)
+    }
     async deleteEventCommentsById(commentId, creatorId) {
 
         const res = await api.delete(`api/comments/${commentId}`)
