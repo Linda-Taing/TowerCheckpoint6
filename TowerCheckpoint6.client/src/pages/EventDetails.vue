@@ -1,11 +1,12 @@
 <template>
   <h5>Tower Logo here on the Deets Page</h5>
 
-  <div v-if="events" class="container">
-
+  <button @click="cancelEvent()" class="btn btn-danger">Remove Event</button>
+  <div v-if="event" class="container">
     <div class="row">
       <div class="col-md-12 card">
-        <h1>{{ events }}</h1>
+        <img :src="event?.coverImg" alt="">
+        {{ event?.name }}
       </div>
     </div>
   </div>
@@ -19,9 +20,15 @@ import { commentsService } from '../services/CommentsService.js';
 import { logger } from '../utils/Logger.js';
 import { AppState } from '../AppState.js';
 import { eventsService } from '../services/EventsService.js';
+import { TowerEvent } from '../models/TowerEvent.js';
 
 
 export default {
+  props: {
+    event: {
+      type: TowerEvent,
+    }
+  },
 
   setup() {
     const route = useRoute();
@@ -32,7 +39,6 @@ export default {
         await eventsService.getEventById(currentEventId);
       } catch (error) {
         Pop.error(error, '[GETTING EVENT BY ID]')
-
       }
     }
 
@@ -45,13 +51,15 @@ export default {
         Pop.error(error, "[GETTING EVENT COMMENTS]");
       }
     }
+
     onMounted(() => {
       getEventComments();
       getEventById();
     });
     return {
+
       comments: computed(() => AppState.comments),
-      events: computed(() => AppState.events),
+      event: computed(() => AppState.currentEvent),
 
       async cancelEvent(eventId) {
         try {

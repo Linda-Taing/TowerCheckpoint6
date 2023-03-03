@@ -1,17 +1,17 @@
 <template>
     <!-- <div class="container">
         <div class="row"> -->
-    <router-link :to="{ name: 'EventDetails', params: { eventId: event.id } }">
-        <div class="selectable card Ecard my-2 ">
-            <img class="img-fluid" :src="event.coverImg" :alt="event.name">
-            <div class="card-body">
-                <p>{{ event.name }}</p>
-                <p>{{ event.startDate }}</p>
-                <p> {{ event.location }}</p>
-                <p>{{ event.capacity }}</p>
-            </div>
+    <!-- <router-link :to="{ name: 'EventDetails', params: { eventId: event.id } }"> -->
+    <div @click="setCurrentEvent()" class="selectable card Ecard my-2 ">
+        <img class="img-fluid" :src="event?.coverImg" :alt="event?.name">
+        <div class="card-body">
+            <p>{{ event?.name }}</p>
+            <p>{{ event?.startDate }}</p>
+            <p> {{ event?.location }}</p>
+            <p>{{ event?.capacity }}</p>
         </div>
-    </router-link>
+    </div>
+    <!-- </router-link> -->
 
 
     <!-- </div>
@@ -25,6 +25,7 @@ import { useRoute } from 'vue-router';
 import { eventsService } from '../services/EventsService.js';
 import { AppState } from '../AppState.js';
 import { computed } from 'vue';
+import { router } from '../router.js';
 export default {
     props: {
         event: {
@@ -34,11 +35,11 @@ export default {
     setup(props) {
         const route = useRoute()
         return {
-            //this function is going to set current event in appSTate. and its going to router.push to event Details. 
-            currentEvent: computed(() => AppState.currentEvent),
             setCurrentEvent() {
                 console.log(props);
                 eventsService.setCurrentEvent(props.event)
+                //FIXME router push
+                router.push({ name: 'EventDetails', params: { eventId: props.event.id } })
             },
 
 

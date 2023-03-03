@@ -5,6 +5,10 @@ import { TowerEvent } from "../models/TowerEvent.js"
 
 
 class EventsService {
+    setCurrentEvent(eventData) {
+        AppState.currentEvent = eventData
+    }
+
     async getAllEvents() {
         const res = await api.get('api/events')
         console.log(res.data)

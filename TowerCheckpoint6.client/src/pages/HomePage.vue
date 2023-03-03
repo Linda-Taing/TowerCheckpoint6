@@ -1,7 +1,7 @@
 <template>
   <div class="p-2 d-flex justify-content-between">
     <h5>Tower Logo Here! (home)</h5>
-    <button @click="cancelEvent()" class="btn btn-danger">Remove Event</button>
+    <!-- <button @click="cancelEvent()" class="btn btn-danger">Remove Event</button> -->
     <button v-if="account.id" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#test-modal">
       Create Event
     </button>
