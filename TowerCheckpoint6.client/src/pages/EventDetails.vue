@@ -13,12 +13,10 @@
           <img class="pic p-2 " :src="currentEvent.coverImg" alt="">
           <div class=" p-2">
             <div v-if="account.id" class=" p-2">
-              <button :disabled="currentEvent.capacity == 0" @click="createTicket(currentEvent.id)"
-                :class="{ 'btn-success': attending, 'btn-primary': !attending }">
-                {{ attending ? 'Attending' : 'Attend Event' }}
-              </button>
-              <!-- <button :disabled="currentEvent.capacity == 0" @click="createTicket(currentEvent.id) :class="{'btn-success': attending, 'btn-primary': !attending}">
-              {{ attending ? 'Attending Event' : 'Attend Event?' }} -->
+              <button class="mb-2 btn btn-success" :disabled="currentEvent.capacity == 0"
+                @click="createTicket(currentEvent.id)">Attend Event</button>
+
+
               <div v-if="account.id">
                 <button v-if="!currentEvent.isCanceled" @click="cancelEvent(currentEvent.id)"
                   class="btn btn-danger w-25 ">Remove
@@ -45,7 +43,8 @@
           <!-- TODO 3-4 8:30am -->
           <!-- this will come from the tickets for this event -->
           <h1>Who is attending?:</h1>
-          {{ tickets }}
+          <div v-for="ticket in tickets"></div>
+          {{ }}
         </div>
       </div>
     </div>
@@ -159,7 +158,6 @@ export default {
       tickets: computed(() => AppState.tickets),
 
       async cancelEvent(eventId) {
-        // FIXME 3-4 @ 8:35am [I updated the eventId in params and in the @click I CAN CANCEL 👍🏼 event but it won't router.push me back to HomePage.]
         try {
           const eventId = route.params.eventId
           if (await Pop.confirm('Are you sure you want to delete this event?')) {
@@ -189,7 +187,6 @@ export default {
           // NOTE ^^ this line will add 'body' to form data, we also need to add the eventId
           // TODO grab the eventId and add it to the object I'm sending to the service.... where on this page can I access the id for the event?
           formData.eventId = route.params.eventId
-          //[[I ADDED THIS LINE VVV  and still coming back with eventId validation Path eventId required. ]]
           await commentsService.createComment(formData)
           editable.value = {}
         } catch (error) {
