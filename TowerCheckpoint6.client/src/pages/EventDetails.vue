@@ -22,6 +22,9 @@
         <p class="fw-bold pb-0">Description:
         <p class="pt-0">{{ event?.description }}</p>
         </p>
+        <div v-if="event?.capacity == 0">
+          <p class="text-danger"> Sold-Out</p>
+        </div>
 
         <p class="fw-bold">capacity: {{ event?.capacity }}</p>
       </div>
