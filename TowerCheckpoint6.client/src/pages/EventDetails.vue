@@ -165,7 +165,6 @@ export default {
       },
       async deleteEventCommentsById(commentId) {
         try {
-          debugger
           if (await Pop.confirm('Are you sure you want to delete this comment?')) {
             await commentsService.deleteEventCommentsById(commentId);
           }
@@ -214,6 +213,6 @@ export default {
 .pic {
   height: 50vh;
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 </style>

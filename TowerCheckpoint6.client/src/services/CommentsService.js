@@ -18,7 +18,6 @@ class CommentsService {
         AppState.comments.push(new Comment(res.data))
     }
     async deleteEventCommentsById(commentId) {
-
         const res = await api.delete(`api/comments/${commentId}`)
         logger.log('[Comments By Id in the Service]', res.data)
         const commentIndex = AppState.comments.findIndex(c => c.commentId == commentId)
