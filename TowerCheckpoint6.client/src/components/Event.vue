@@ -46,7 +46,6 @@ export default {
             setCurrentEvent() {
                 console.log(props);
                 eventsService.setCurrentEvent(props.event)
-                //FIXME router push
                 router.push({ name: 'EventDetails', params: { eventId: props.event.id } })
             },
 

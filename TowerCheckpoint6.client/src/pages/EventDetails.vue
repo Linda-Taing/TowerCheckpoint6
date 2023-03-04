@@ -13,9 +13,18 @@
           <img class="pic p-2 " :src="currentEvent.coverImg" alt="">
           <div class=" p-2">
             <div v-if="account.id" class=" p-2">
-              <button @click="createTicket(currentEvent.id)">Attend Event</button>
-              <button @click="cancelEvent(currentEvent.id)" class="btn btn-danger w-25 ">Remove
-                Event</button>
+              <button :disabled="currentEvent.capacity == 0" @click="createTicket(currentEvent.id)"
+                :class="{ 'btn-success': attending, 'btn-primary': !attending }">
+                {{ attending ? 'Attending' : 'Attend Event' }}
+              </button>
+              <!-- <button :disabled="currentEvent.capacity == 0" @click="createTicket(currentEvent.id) :class="{'btn-success': attending, 'btn-primary': !attending}">
+              {{ attending ? 'Attending Event' : 'Attend Event?' }} -->
+              <div v-if="account.id">
+                <button v-if="!currentEvent.isCanceled" @click="cancelEvent(currentEvent.id)"
+                  class="btn btn-danger w-25 ">Remove
+                  Event</button>
+
+              </div>
             </div>
             <p>Date of event: {{ currentEvent.startDate }}</p>
             <p>Type of event: {{ currentEvent.type }}</p>
@@ -158,7 +167,7 @@ export default {
           }
         } catch (error) {
           logger.log(error);
-          Pop.error(error.message);
+          Pop.error('You CANNOT cancel an event you did not create', error);
           router.push("/")
         }
       },
