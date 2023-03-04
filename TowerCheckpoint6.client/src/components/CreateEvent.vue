@@ -37,7 +37,7 @@
                 <option value="concert">Concert</option>
                 <option value="convention">Conventions</option>
                 <option value="digital">Digital</option>
-                <option value="sports">Sports</option>
+                <option value="sport">Sports</option>
             </select>
         </div>
         <div class="modal-footer">
