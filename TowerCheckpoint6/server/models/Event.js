@@ -8,10 +8,10 @@ export const EventSchema = new Schema(
         description: { type: String, required: true, maxLength: 1000 },
         coverImg: { type: String, required: true, maxLength: 5000 },
         location: { type: String, required: true },
-        // FIXME don't allow a negative capacity
+        // FIXME don't allow a negative capacity [[COMPLETE]]
         capacity: { type: Number, required: true, default: 100, min: 0, max: 300 },
         startDate: { type: Date, required: true, },
-        // FIXME don't allow anything to be put in here, must be one of a specific value
+        // FIXME don't allow anything to be put in here, must be one of a specific value [[COMPLETE]]
         type: { type: String, enum: ['concert', 'digital', 'convention', 'sport'], required: true },
         isCanceled: { type: Boolean, required: true, default: false },
 
