@@ -2,7 +2,7 @@
     <!-- <div class="container">
         <div class="row"> -->
     <!-- <router-link :to="{ name: 'EventDetails', params: { eventId: event.id } }"> -->
-    <div @click="setCurrentEvent()" class="selectable card Ecard my-2 ">
+    <div @click="setCurrentEvent(event.id)" class="selectable card Ecard my-2 ">
         <div v-if="event?.isCanceled">
             <p class="text-danger">Cancelled Event</p>
         </div>
@@ -12,6 +12,7 @@
                 <p class="text-danger"> Sold-Out</p>
             </div>
             <p>{{ event?.name }}</p>
+            <p>{{ event.type }}</p>
             <p>{{ event?.startDate }}</p>
             <p> {{ event?.location }}</p>
             <p>{{ event?.capacity }}</p>
