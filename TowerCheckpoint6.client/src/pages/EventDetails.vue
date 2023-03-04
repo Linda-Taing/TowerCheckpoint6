@@ -39,7 +39,8 @@
       <div class="mb-3 col-10 ms-5 ">
         <label for="exampleFormControlInput1" class="p-2 fw-bold form-label">Add Comment Here:</label>
         <!-- TODO make sure to bind the appropriate property here to your ref -->
-        <input type="email" class="mt-1 form-control" id="exampleFormControlInput1" placeholder="Your thoughts here!!">
+        <input type="email" class="mt-1 form-control" v-model="editable.body" id="exampleFormControlInput1"
+          placeholder="Your thoughts here!!">
         <div @click="createComment()" class="d-flex justify-content-end">
           <button class="btn btn-success p-1 mt-3 ">Add Comment</button>
         </div>
@@ -85,14 +86,14 @@ export default {
 
   setup() {
     const editable = ref({})
-    // NOTE useRoute allows me to access anything in the current URL
+    // NOTE useRoute allows me to access anything in the current URL [👍🏼]
     const route = useRoute();
 
     async function getEventById() {
       try {
-        // TODO make sure we are accessing the correct parameter here, refer to what you called in the router.js...whatever comes after the ':' is the name of your param
-        const currentEventId = route.params.currentEventId
-        await eventsService.getEventById(currentEventId);
+        // TODO make sure we are accessing the correct parameter here, refer to what you called in the router.js...whatever comes after the ':' is the name of your param. [CORRECTED]
+        const eventId = route.params.eventId
+        await eventsService.getEventById(eventId);
       } catch (error) {
         Pop.error(error, '[GETTING EVENT BY ID]')
       }
