@@ -1,8 +1,5 @@
 <template>
   <h5>Tower Logo here on the Deets Page</h5>
-  <!-- TODO make sure to put some styling indication on this page if the event is cancelled as well as sold out(capacity)-->
-  <!-- ^^^ you did this for cancelled on your Event component lines 6-8 -->
-
   <div v-if="event" class="container">
     <div class="row">
       <div class="col-md-12 card">
@@ -13,26 +10,28 @@
           <h2>{{ event?.name }}</h2>
         </div>
         <img class="pic p-2 " :src="event?.coverImg" alt="">
-        <!-- <div class="d-flex justify-content-end p-2">
-          <div v-if="account.id && ticket.id" class="d-flex justify-content-end p-2">
-          <button @click="cancelEvent()" class="btn btn-danger w-25 ">Remove Event</button>
-        </div> -->
-        <p>Date of event: {{ event?.startDate }}</p>
-        <p>Type of event: {{ event?.type }}</p>
-        <p class="fw-bold pb-0">Description:
-        <p class="pt-0">{{ event?.description }}</p>
-        </p>
-        <div v-if="event?.capacity == 0">
-          <p class="text-danger"> Sold-Out</p>
+        <div class=" p-2">
+          <div v-if="account.id" class=" p-2">
+            <button @click="cancelEvent(event?.id)" class="btn btn-danger w-25 ">Remove
+              Event</button>
+          </div>
+          <p>Date of event: {{ event?.startDate }}</p>
+          <p>Type of event: {{ event?.type }}</p>
+          <p class="fw-bold pb-0">Description:
+          <p class="pt-0">{{ event?.description }}</p>
+          </p>
+          <div v-if="event?.capacity == 0">
+            <p class="text-danger"> Sold-Out</p>
+          </div>
+          <p class="fw-bold">capacity: {{ event?.capacity }}</p>
         </div>
-
-        <p class="fw-bold">capacity: {{ event?.capacity }}</p>
       </div>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <!-- TODO 3-4 8:30am -->
         <!-- this will come from the tickets for this event -->
         <h1>Who is attending?:</h1>
       </div>
@@ -44,10 +43,11 @@
     <div class="row">
       <div class="mb-3 col-10 ms-5 ">
         <label for="exampleFormControlInput1" class="p-2 fw-bold form-label">Add Comment Here:</label>
-        <!-- TODO make sure to bind the appropriate property here to your ref -->
+        <!-- TODO make sure to bind the appropriate property here to your ref [looking for eventId still....added v-model editable.body]-->
+        <!-- FIXME  3-4 AT 8:30 [looking for eventId still....added v-model editable.body]-->
         <input type="email" class="mt-1 form-control" v-model="editable.body" id="exampleFormControlInput1"
           placeholder="Your thoughts here!!">
-        <div @click="createComment(event.id)" class="d-flex justify-content-end">
+        <div @click="createComment()" class="d-flex justify-content-end">
           <button class="btn btn-success p-1 mt-3 ">Add Comment</button>
         </div>
       </div>
@@ -62,7 +62,10 @@
               <p class="ms-3">{{ comment?.body }} </p>
               <div class="d-flex justify-content-end">
                 <!-- TODO make sure that we are hiding this button from other -->
-                <button @click="deleteEventCommentsById(comment?.id)" class="btn btn-danger ms-3">Delete Comment</button>
+                <div v-if="account.id">
+                  <button @click="deleteEventCommentsById(comment?.id)" class="btn btn-danger ms-3">Delete
+                    Comment</button>
+                </div>
               </div>
             </div>
           </div>
@@ -81,6 +84,7 @@ import { logger } from '../utils/Logger.js';
 import { AppState } from '../AppState.js';
 import { eventsService } from '../services/EventsService.js';
 import { TowerEvent } from '../models/TowerEvent.js';
+import { router } from '../router.js';
 
 
 export default {
@@ -97,14 +101,15 @@ export default {
 
     async function getEventById() {
       try {
-        // TODO make sure we are accessing the correct parameter here, refer to what you called in the router.js...whatever comes after the ':' is the name of your param. [CORRECTED]
+        // TODO make sure we are accessing the correct parameter here, refer to what you called in the router.js...whatever comes after the ':' is the name of your param. 
+        // FIXME 3-4 8:30AM [CORRECTED but not responding when I refresh it is still disappearing from page and leaves only the hard code template.]
         const eventId = route.params.eventId;
         await eventsService.getEventById(eventId);
       } catch (error) {
         Pop.error(error, '[GETTING EVENT BY ID]')
       }
     }
-
+    //FIXME - 3-4 @ 8:30 AM comments come in network as http://localhost:3000/api/events/:eventId/comments ... VVVV
     async function getEventComments() {
       try {
         const eventId = route.params.eventId;
@@ -120,7 +125,7 @@ export default {
 
     onMounted(() => {
       getEventComments();
-      getEventById(eventId);
+      getEventById();
     });
     return {
       editable,
@@ -128,17 +133,19 @@ export default {
       comments: computed(() => AppState.comments),
       event: computed(() => AppState.currentEvent),
 
-      async cancelEvent() {
+      async cancelEvent(eventId) {
         // TODO need a button to call this method
         // make sure to pass the id;  where do I get the eventId on this page?
-
+        // FIXME 3-4 @ 8:35am [I updated the eventId in params and in the @click I can cancel event but it won't router.push me back to HomePage.]
         try {
+          const eventId = route.params.eventId
           if (await Pop.confirm('Are you sure you want to delete this event?')) {
             await eventsService.cancelEvent(eventId);
           }
         } catch (error) {
           logger.log(error);
           Pop.error(error.message);
+          router.push("/")
         }
       },
       async deleteEventCommentsById(commentId) {
@@ -159,6 +166,7 @@ export default {
           const formData = editable.value
           // NOTE ^^ this line will add 'body' to form data, we also need to add the eventId
           // TODO grab the eventId and add it to the object I'm sending to the service.... where on this page can I access the id for the event?
+          const eventId = route.params.eventId
           await commentsService.createComment(formData)
           editable.value = {}
         } catch (error) {
@@ -185,6 +193,6 @@ export default {
 .pic {
   height: 50vh;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 </style>
