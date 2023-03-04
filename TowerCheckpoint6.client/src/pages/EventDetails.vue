@@ -12,6 +12,7 @@
         <img class="pic p-2 " :src="event?.coverImg" alt="">
         <div class=" p-2">
           <div v-if="account.id" class=" p-2">
+            <button @click="createTicket(event?.id)">Attend Event</button>
             <button @click="cancelEvent(event?.id)" class="btn btn-danger w-25 ">Remove
               Event</button>
           </div>
@@ -34,11 +35,11 @@
         <!-- TODO 3-4 8:30am -->
         <!-- this will come from the tickets for this event -->
         <h1>Who is attending?:</h1>
+        {{ tickets }}
       </div>
     </div>
   </div>
 
-  (space between)
   <div class="container">
     <div class="row">
       <div class="mb-3 col-10 ms-5 ">
@@ -83,6 +84,7 @@ import { commentsService } from '../services/CommentsService.js';
 import { logger } from '../utils/Logger.js';
 import { AppState } from '../AppState.js';
 import { eventsService } from '../services/EventsService.js';
+import { attendeesService } from '../services/AttendeesService.js';
 import { TowerEvent } from '../models/TowerEvent.js';
 import { router } from '../router.js';
 
@@ -122,16 +124,29 @@ export default {
 
     // TODO need to get tickets for this event
     // refer to 'get event tickets' test in postman for what route to send this request to in the service
+    async function getEventTickets() {
+      try {
+        const eventId = route.params.eventId;
+        await attendeesService.getEventTickets(eventId);
+
+      } catch (error) {
+        Pop.error(error, '[GETTING ATTENDEES?]')
+
+      }
+    }
 
     onMounted(() => {
       getEventComments();
       getEventById();
+      getEventTickets();
     });
     return {
       editable,
       account: computed(() => AppState.account),
       comments: computed(() => AppState.comments),
       event: computed(() => AppState.currentEvent),
+      events: computed(() => AppState.events),
+      tickets: computed(() => AppState.tickets),
 
       async cancelEvent(eventId) {
         // TODO need a button to call this method
@@ -172,13 +187,19 @@ export default {
         } catch (error) {
           Pop.error(error)
         }
-      }
-
+      },
       // TODO need a method for creating a ticket, the server will handle the account id, you are responsible for providing the eventId
       // where can I access the id of the event of whose page I am currently on?
       // check postman for what type of req. we need to send here
       // ANCHOR make sure this button for creating a ticket goes away or disables if I have one, the event is cancelled, or capacity == 0
-
+      async createTicket(eventId) {
+        try {
+          const eventId = await attendeesService.createTicket({ eventId: route.params.eventId });
+        } catch (error) {
+          logger.log(error)
+          Pop.error(error, '[Am I creating a ticket?]')
+        }
+      },
 
 
       // ---Do not pass-- VVVVV End Of Return //
