@@ -1,71 +1,73 @@
 <template>
-  <h5>Tower Logo here on the Deets Page</h5>
-  <div v-if="event" class="container">
-    <div class="row">
-      <div class="col-md-12 card">
-        <div class="card-title">
-          <div v-if="event?.isCanceled">
-            <p class="text-danger">Cancelled Event</p>
+  <section v-if="currentEvent">
+    <h5>Tower Logo here on the Deets Page</h5>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 card">
+          <div class="card-title">
+            <div v-if="currentEvent.isCanceled">
+              <p class="text-danger">Cancelled Event</p>
+            </div>
+            <h2>{{ currentEvent.name }}</h2>
           </div>
-          <h2>{{ event?.name }}</h2>
-        </div>
-        <img class="pic p-2 " :src="event?.coverImg" alt="">
-        <div class=" p-2">
-          <div v-if="account.id" class=" p-2">
-            <button @click="createTicket(event?.id)">Attend Event</button>
-            <button @click="cancelEvent(event?.id)" class="btn btn-danger w-25 ">Remove
-              Event</button>
+          <img class="pic p-2 " :src="currentEvent.coverImg" alt="">
+          <div class=" p-2">
+            <div v-if="account.id" class=" p-2">
+              <button @click="createTicket(currentEvent.id)">Attend Event</button>
+              <button @click="cancelEvent(currentEvent.id)" class="btn btn-danger w-25 ">Remove
+                Event</button>
+            </div>
+            <p>Date of event: {{ currentEvent.startDate }}</p>
+            <p>Type of event: {{ currentEvent.type }}</p>
+            <p class="fw-bold pb-0">Description:
+            <p class="pt-0">{{ currentEvent.description }}</p>
+            </p>
+            <div v-if="currentEvent.capacity == 0">
+              <p class="text-danger"> Sold-Out</p>
+            </div>
+            <p class="fw-bold">capacity: {{ currentEvent.capacity }}</p>
           </div>
-          <p>Date of event: {{ event?.startDate }}</p>
-          <p>Type of event: {{ event?.type }}</p>
-          <p class="fw-bold pb-0">Description:
-          <p class="pt-0">{{ event?.description }}</p>
-          </p>
-          <div v-if="event?.capacity == 0">
-            <p class="text-danger"> Sold-Out</p>
-          </div>
-          <p class="fw-bold">capacity: {{ event?.capacity }}</p>
         </div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <!-- TODO 3-4 8:30am -->
-        <!-- this will come from the tickets for this event -->
-        <h1>Who is attending?:</h1>
-        {{ tickets }}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <!-- TODO 3-4 8:30am -->
+          <!-- this will come from the tickets for this event -->
+          <h1>Who is attending?:</h1>
+          {{ tickets }}
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="mb-3 col-10 ms-5 ">
-        <label for="exampleFormControlInput1" class="p-2 fw-bold form-label">Add Comment Here:</label>
-        <!-- TODO make sure to bind the appropriate property here to your ref -->
-        <!-- FIXME  3-4 AT 8:30 [looking for eventId still....added v-model editable.body]-->
-        <input type="email" class="mt-1 form-control" v-model="editable.body" id="exampleFormControlInput1"
-          placeholder="Your thoughts here!!">
-        <div @click="createComment()" class="d-flex justify-content-end">
-          <button class="btn btn-success p-1 mt-3 ">Add Comment</button>
+    <div class="container">
+      <div class="row">
+        <div class="mb-3 col-10 ms-5 ">
+          <label for="exampleFormControlInput1" class="p-2 fw-bold form-label">Add Comment Here:</label>
+          <!-- TODO make sure to bind the appropriate property here to your ref -->
+          <!-- FIXME  3-4 AT 8:30 [looking for eventId still....added v-model editable.body]-->
+          <input type="email" class="mt-1 form-control" v-model="editable.body" id="exampleFormControlInput1"
+            placeholder="Your thoughts here!!">
+          <div @click="createComment()" class="d-flex justify-content-end">
+            <button class="btn btn-success p-1 mt-3 ">Add Comment</button>
+          </div>
         </div>
-      </div>
-      <div v-for="comment in comments" class="col-md-12">
-        <h1>Comments:</h1>
-        <div class="card rounded-0">
-          <div>
-            <div class="mt-3 p-2 card rounded-0">
-              <img class="p-3 rounded-circle" title="Profile Picture" height="100" width="100"
-                :src="comment.creator.picture" alt="">
-              <p class="p-3">{{ comment?.creator.name }}</p>
-              <p class="ms-3">{{ comment?.body }} </p>
-              <div class="d-flex justify-content-end">
-                <!-- TODO make sure that we are hiding this button from other -->
-                <div v-if="account.id">
-                  <button @click="deleteEventCommentsById(comment?.id)" class="btn btn-danger ms-3">Delete
-                    Comment</button>
+        <div v-for="comment in comments" class="col-md-12">
+          <h1>Comments:</h1>
+          <div class="card rounded-0">
+            <div>
+              <div class="mt-3 p-2 card rounded-0">
+                <img class="p-3 rounded-circle" title="Profile Picture" height="100" width="100"
+                  :src="comment.creator.picture" alt="">
+                <p class="p-3">{{ comment?.creator.name }}</p>
+                <p class="ms-3">{{ comment?.body }} </p>
+                <div class="d-flex justify-content-end">
+                  <!-- TODO make sure that we are hiding this button from other -->
+                  <div v-if="account.id">
+                    <button @click="deleteEventCommentsById(comment?.id)" class="btn btn-danger ms-3">Delete
+                      Comment</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -73,7 +75,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
+  <section class="loading" v-else>
+    <h1 class="text-center">loading...</h1>
+  </section>
 </template>
 
 <script>
@@ -90,11 +95,7 @@ import { router } from '../router.js';
 
 
 export default {
-  props: {
-    event: {
-      type: TowerEvent,
-    }
-  },
+
 
   setup() {
     const editable = ref({})
@@ -145,8 +146,7 @@ export default {
       editable,
       account: computed(() => AppState.account),
       comments: computed(() => AppState.comments),
-      event: computed(() => AppState.currentEvent),
-      events: computed(() => AppState.events),
+      currentEvent: computed(() => AppState.currentEvent),
       tickets: computed(() => AppState.tickets),
 
       async cancelEvent(eventId) {
@@ -174,13 +174,13 @@ export default {
           logger.log('[ARE YOU DELETED?]')
         }
       },
-      async createComment(eventId) {
+      async createComment() {
         try {
           const formData = editable.value
           // NOTE ^^ this line will add 'body' to form data, we also need to add the eventId
           // TODO grab the eventId and add it to the object I'm sending to the service.... where on this page can I access the id for the event?
+          formData.eventId = route.params.eventId
           //[[I ADDED THIS LINE VVV  and still coming back with eventId validation Path eventId required. ]]
-          const eventId = route.params.eventId
           await commentsService.createComment(formData)
           editable.value = {}
         } catch (error) {
@@ -191,9 +191,9 @@ export default {
       // where can I access the id of the event of whose page I am currently on?
       // check postman for what type of req. we need to send here
       // ANCHOR make sure this button for creating a ticket goes away or disables if I have one, the event is cancelled, or capacity == 0
-      async createTicket(eventId) {
+      async createTicket() {
         try {
-          const eventId = await attendeesService.createTicket({ eventId: route.params.eventId });
+          await attendeesService.createTicket({ eventId: route.params.eventId });
         } catch (error) {
           logger.log(error)
           Pop.error(error, '[Am I creating a ticket?]')

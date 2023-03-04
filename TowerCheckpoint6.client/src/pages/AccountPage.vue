@@ -4,15 +4,15 @@
 
   <div class="container">
     <div class="row">
-      <div v-for=" tick in tickets" class="col">
+      <div v-for=" ticket in tickets" class="col">
         <div class="card short">
           <!-- ANCHOR you may reuse your event component as long as you pass down an event -->
           <!-- Tickets Are Here! but they come in Raw data. Need to dig through tickets.event -->
           <!-- <img :src="tickets.events.coverImg" alt=""> 3-4 9:05 [tried to dig in as the example to the one above it will not allow me to dig into that next property. but when I have {{ tickets }} stilL all raw data.] -->
           <div class="d-flex justify-content-end">
-            {{ tickets }}
+            {{ ticket.event.name }}
             <!-- make sure that you pass down the ticket id here 3-4 9:07 am[[tried to delete and came back with a 400 error saying the ticket is undefined even though I passed the ticket.id as value. It has props and I computed to be able to obtain its properties from Model and AppState and is still not accessible. error: http://localhost:3000/api/tickets/undefined]] -->
-            <button @click="deleteTicket(tickets.id)" class="btn smaller btn-danger m-2 p-2">Delete ticket!</button>
+            <button @click="deleteTicket(ticket.id)" class="btn smaller btn-danger m-2 p-2">Delete ticket!</button>
           </div>
         </div>
       </div>
@@ -30,11 +30,6 @@ import { Ticket } from '../models/Ticket.js'
 
 
 export default {
-  props: {
-    tickets: {
-      type: Ticket,
-    }
-  },
 
   setup() {
     async function getMyTickets() {

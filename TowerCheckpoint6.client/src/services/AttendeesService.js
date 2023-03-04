@@ -10,7 +10,7 @@ class AttendeesService {
     // TODO add method for getting tickets for event
     // make sure to send in the correct parameter (check postman)
     // FIXME 3-4 9:54 am[[added method in from Event Details Page. This looks like the get comments method and I referenced but it is returning Undefined. this is to draw the attendees onto the EventsDetails page.]]
-    async getEventTickets() {
+    async getEventTickets(eventId) {
         const res = await api.get(`api/events/${eventId}/tickets`)
         logger.log('[GETTING ALL THE ATTENDEES?', res.data)
         const tickets = res.data.map(t => new Ticket(t))
@@ -22,8 +22,8 @@ class AttendeesService {
         const tickets = res.data
         AppState.tickets = tickets
     }
-    async createTicket() {
-        const res = await api.post('api/tickets', eventId)
+    async createTicket(ticketData) {
+        const res = await api.post('api/tickets', ticketData)
         logger.log('creating ticket', res.data)
     }
 
