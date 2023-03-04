@@ -36,7 +36,7 @@ class EventsService {
         const res = await api.delete(`api/events/${eventId}`)
 
         logger.log('[CANCELLING EVENT]', res.data)
-        const eventIndex = AppState.events.findIndex(e => e.eventId == eventId)
+        const eventIndex = AppState.events.findIndex(e => e.id == eventId)
         if (eventId !== -1) {
             AppState.events.splice(eventIndex, 1)
         }

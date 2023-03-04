@@ -1,12 +1,18 @@
 <template>
   <h5>Tower Logo Here! (acct)</h5>
-  <button @click="deleteTicket()" class="btn btn-danger p-2">Delete ticket!</button>
 
 
   <div class="container">
     <div class="row">
       <div v-for=" tick in tickets" class="col">
-        {{ tickets }}
+        <div class="card short">
+          <!-- ANCHOR you may reuse your event component as long as you pass down an event -->
+          Tickets Are Here! but they come in Raw data. Need to dig through tickets.event
+          <div class="d-flex justify-content-end">
+            <!-- make sure that you pass down the ticket id here -->
+            <button @click="deleteTicket()" class="btn smaller btn-danger m-2 p-2">Delete ticket!</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -54,10 +60,10 @@ export default {
         }
       },
 
-      async deleteTicket(attendeeId) {
+      async deleteTicket(ticketId) {
         try {
           if (await Pop.confirm('Are you sure you want to delete the ticket?')) {
-            await attendeesService.deleteTicket(attendeeId);
+            await attendeesService.deleteTicket(ticketId);
           }
         }
         catch (error) {
@@ -73,4 +79,12 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.short {
+  width: 15 em;
+}
+
+.smaller {
+  width: 8em;
+}
+</style>

@@ -13,6 +13,8 @@ class CommentsService {
     async createComment(formData) {
         const res = await api.post('api/comments', formData)
         logger.log('[CREATING COMMENT]', res.data)
+        // TODO add the comment into the array...look at push method
+        // NOTE you will not need '=' here
         AppState.comments = new Comment(res.data)
     }
     async deleteEventCommentsById(commentId, creatorId) {

@@ -6,10 +6,13 @@ import { Ticket } from "../models/Ticket.js"
 
 
 class AttendeesService {
+
+    // TODO add method for getting tickets for event
+    // make sure to send in the correct parameter (check postman)
     async getMyTickets() {
         const res = await api.get('account/tickets')
         logger.log('[Getting my tickets]', res.data)
-        const tickets = res.data.map(t => new Ticket(t))
+        const tickets = res.data
         AppState.tickets = tickets
     }
     async createTicket() {
@@ -17,13 +20,12 @@ class AttendeesService {
         logger.log('creating ticket', res.data)
     }
 
-    async deleteTicket(attendeeId) {
-        const res = await api.delete(`api/tickets/${attendeeId}`)
-
+    async deleteTicket(ticketId) {
+        const res = await api.delete(`api/tickets/${ticketId}`)
         logger.log('[DELETING TICKET]', res.data)
-        const ticketIndex = AppState.attendees.findIndex(t => t.attendeeId == attendeeId)
-        if (attendeeId !== -1) {
-            AppState.attendees.splice(ticketIndex, 1)
+        const ticketIndex = AppState.tickets.findIndex(t => t.id == ticketId)
+        if (ticketId !== -1) {
+            AppState.tickets.splice(ticketIndex, 1)
         }
     }
 

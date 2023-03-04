@@ -3,6 +3,9 @@
         <div class="row"> -->
     <!-- <router-link :to="{ name: 'EventDetails', params: { eventId: event.id } }"> -->
     <div @click="setCurrentEvent()" class="selectable card Ecard my-2 ">
+        <div v-if="event?.isCanceled">
+            <p class="text-danger">Cancelled Event</p>
+        </div>
         <img class="img-fluid" :src="event?.coverImg" :alt="event?.name">
         <div class="card-body">
             <p>{{ event?.name }}</p>
