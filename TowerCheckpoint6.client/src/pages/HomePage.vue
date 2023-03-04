@@ -24,7 +24,7 @@
         <div class="bg-secondary rounded p-3 d-flex justify-content-around">
           <button @click="changeFilterType('')" class="btn btn-outline-light">All</button>
           <button @click="changeFilterType('concert')" class="btn btn-outline-light">Concert</button>
-          <button @click="changeFilterType('sports')" class="btn btn-outline-light">Sports</button>
+          <button @click="changeFilterType('sport')" class="btn btn-outline-light">Sport</button>
           <button @click="changeFilterType('digital')" class="btn btn-outline-light">Digital</button>
           <button @click="changeFilterType('convention')" class="btn btn-outline-light">Convention</button>
         </div>
