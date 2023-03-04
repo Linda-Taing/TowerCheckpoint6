@@ -16,6 +16,7 @@ class CommentsService {
         // TODO add the comment into the array...look at push method
         // NOTE you will not need '=' here
         AppState.comments.push(new Comment(res.data))
+        return res.data
     }
     async deleteEventCommentsById(commentId) {
         const res = await api.delete(`api/comments/${commentId}`)

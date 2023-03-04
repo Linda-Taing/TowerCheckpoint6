@@ -44,7 +44,7 @@
     <div class="row">
       <div class="mb-3 col-10 ms-5 ">
         <label for="exampleFormControlInput1" class="p-2 fw-bold form-label">Add Comment Here:</label>
-        <!-- TODO make sure to bind the appropriate property here to your ref [looking for eventId still....added v-model editable.body]-->
+        <!-- TODO make sure to bind the appropriate property here to your ref -->
         <!-- FIXME  3-4 AT 8:30 [looking for eventId still....added v-model editable.body]-->
         <input type="email" class="mt-1 form-control" v-model="editable.body" id="exampleFormControlInput1"
           placeholder="Your thoughts here!!">
@@ -98,7 +98,7 @@ export default {
 
   setup() {
     const editable = ref({})
-    // NOTE useRoute allows me to access anything in the current URL [👍🏼]
+    //  useRoute allows me to access anything in the current URL [👍🏼]
     const route = useRoute();
 
     async function getEventById() {
@@ -111,7 +111,7 @@ export default {
         Pop.error(error, '[GETTING EVENT BY ID]')
       }
     }
-    //FIXME - 3-4 @ 8:30 AM comments come in network as http://localhost:3000/api/events/:eventId/comments ... VVVV
+
     async function getEventComments() {
       try {
         const eventId = route.params.eventId;
@@ -124,6 +124,7 @@ export default {
 
     // TODO need to get tickets for this event
     // refer to 'get event tickets' test in postman for what route to send this request to in the service
+    //FIXME 10:35 [[Checked though again and network not showing tickets drawn for attendees]]
     async function getEventTickets() {
       try {
         const eventId = route.params.eventId;
@@ -149,9 +150,7 @@ export default {
       tickets: computed(() => AppState.tickets),
 
       async cancelEvent(eventId) {
-        // TODO need a button to call this method
-        // make sure to pass the id;  where do I get the eventId on this page?
-        // FIXME 3-4 @ 8:35am [I updated the eventId in params and in the @click I can cancel event but it won't router.push me back to HomePage.]
+        // FIXME 3-4 @ 8:35am [I updated the eventId in params and in the @click I CAN CANCEL 👍🏼 event but it won't router.push me back to HomePage.]
         try {
           const eventId = route.params.eventId
           if (await Pop.confirm('Are you sure you want to delete this event?')) {
@@ -172,14 +171,15 @@ export default {
         catch (error) {
           logger.log("[comments with IDs]");
           Pop.error(error);
+          logger.log('[ARE YOU DELETED?]')
         }
       },
       async createComment(eventId) {
         try {
-          // ANCHOR we will get the body from the input field, we also need to add the eventId to 
           const formData = editable.value
           // NOTE ^^ this line will add 'body' to form data, we also need to add the eventId
           // TODO grab the eventId and add it to the object I'm sending to the service.... where on this page can I access the id for the event?
+          //[[I ADDED THIS LINE VVV  and still coming back with eventId validation Path eventId required. ]]
           const eventId = route.params.eventId
           await commentsService.createComment(formData)
           editable.value = {}
