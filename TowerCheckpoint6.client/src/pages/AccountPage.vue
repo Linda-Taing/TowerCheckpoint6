@@ -53,6 +53,8 @@ export default {
       attendees: computed(() => AppState.attendees),
       account: computed(() => AppState.account),
       tickets: computed(() => AppState.tickets),
+
+
       // NOTE 3-4 10am[[moved this method to eventDetails page to be able to draw attendees to page there.]]
       // async createTicket() {
       //   try {
