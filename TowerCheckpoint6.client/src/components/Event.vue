@@ -6,6 +6,7 @@
         <div v-if="event?.isCanceled">
             <p class="text-danger">Cancelled Event</p>
         </div>
+        <div v-if="event?.capacity == 0"></div>
         <img class="img-fluid" :src="event?.coverImg" :alt="event?.name">
         <div class="card-body">
             <p>{{ event?.name }}</p>

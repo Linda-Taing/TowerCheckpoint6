@@ -7,10 +7,11 @@
       <div v-for=" tick in tickets" class="col">
         <div class="card short">
           <!-- ANCHOR you may reuse your event component as long as you pass down an event -->
-          Tickets Are Here! but they come in Raw data. Need to dig through tickets.event
+          <!-- Tickets Are Here! but they come in Raw data. Need to dig through tickets.event -->
           <div class="d-flex justify-content-end">
+            {{ tickets.events.name }}
             <!-- make sure that you pass down the ticket id here -->
-            <button @click="deleteTicket()" class="btn smaller btn-danger m-2 p-2">Delete ticket!</button>
+            <button @click="deleteTicket(tickets.id)" class="btn smaller btn-danger m-2 p-2">Delete ticket!</button>
           </div>
         </div>
       </div>
@@ -47,6 +48,7 @@ export default {
       getMyTickets();
     });
     return {
+      events: computed(() => AppState.events),
       attendees: computed(() => AppState.attendees),
       account: computed(() => AppState.account),
       tickets: computed(() => AppState.tickets),

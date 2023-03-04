@@ -19,7 +19,7 @@ class EventsService {
 
     }
     async getEventById(eventId) {
-        const res = await api.get(`api/events/`, eventId)
+        const res = await api.get('api/events/' + eventId)
         logger.log('[Events by ID in the service]', res.data)
         const currentEvent = res.data.map(e => new TowerEvent(e))
         AppState.events = currentEvent

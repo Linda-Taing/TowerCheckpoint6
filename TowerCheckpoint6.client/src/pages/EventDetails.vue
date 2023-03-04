@@ -7,6 +7,9 @@
     <div class="row">
       <div class="col-md-12 card">
         <div class="card-title">
+          <div v-if="event?.isCanceled">
+            <p class="text-danger">Cancelled Event</p>
+          </div>
           <h2>{{ event?.name }}</h2>
         </div>
         <img class="pic p-2 " :src="event?.coverImg" alt="">
@@ -41,7 +44,7 @@
         <!-- TODO make sure to bind the appropriate property here to your ref -->
         <input type="email" class="mt-1 form-control" v-model="editable.body" id="exampleFormControlInput1"
           placeholder="Your thoughts here!!">
-        <div @click="createComment()" class="d-flex justify-content-end">
+        <div @click="createComment(event.id)" class="d-flex justify-content-end">
           <button class="btn btn-success p-1 mt-3 ">Add Comment</button>
         </div>
       </div>
@@ -92,7 +95,7 @@ export default {
     async function getEventById() {
       try {
         // TODO make sure we are accessing the correct parameter here, refer to what you called in the router.js...whatever comes after the ':' is the name of your param. [CORRECTED]
-        const eventId = route.params.eventId
+        const eventId = route.params.eventId;
         await eventsService.getEventById(eventId);
       } catch (error) {
         Pop.error(error, '[GETTING EVENT BY ID]')
@@ -114,7 +117,7 @@ export default {
 
     onMounted(() => {
       getEventComments();
-      getEventById();
+      getEventById(eventId);
     });
     return {
       editable,
@@ -147,7 +150,7 @@ export default {
           Pop.error(error);
         }
       },
-      async createComment() {
+      async createComment(eventId) {
         try {
           // ANCHOR we will get the body from the input field, we also need to add the eventId to 
           const formData = editable.value
