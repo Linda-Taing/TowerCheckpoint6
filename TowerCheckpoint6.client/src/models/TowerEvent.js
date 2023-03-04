@@ -8,7 +8,7 @@ export class TowerEvent {
         this.coverImg = data.coverImg
         this.location = data.location
         this.capacity = data.capacity
-        this.startDate = data.startDate
+        this.startDate = new Date(data.startDate).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
         this.type = data.type
         // this.createdAt = new Date(data.StartDate).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' });
     }
