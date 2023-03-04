@@ -53,15 +53,15 @@ export default {
       attendees: computed(() => AppState.attendees),
       account: computed(() => AppState.account),
       tickets: computed(() => AppState.tickets),
-
-      async createTicket() {
-        try {
-          await attendeesService.createTicket({ eventId: route.params.eventId });
-        } catch (error) {
-          logger.log(error)
-          Pop.error(error, '[Am I creating a ticket?]')
-        }
-      },
+      // NOTE 3-4 10am[[moved this method to eventDetails page to be able to draw attendees to page there.]]
+      // async createTicket() {
+      //   try {
+      //     await attendeesService.createTicket({ eventId: route.params.eventId });
+      //   } catch (error) {
+      //     logger.log(error)
+      //     Pop.error(error, '[Am I creating a ticket?]')
+      //   }
+      // },
 
       async deleteTicket(ticketId) {
         try {
