@@ -14,10 +14,10 @@
           <div class=" p-2">
             <div v-if="account.id && !currentEvent.isCanceled" class=" p- 2">
               <div v-if="currentEvent.capacity == 0"></div>
-              <button v-else="account.id && currentEvent.id " @click="createTicket(currentEvent.id)"
+              <button v-else="account.id && comment.creatorId" @click="createTicket(currentEvent.id)"
                 class="btn btn-success">Attend Event
               </button>
-              <button v-if="!currentEvent.isCanceled && account.id" @click="cancelEvent(currentEvent.id)"
+              <button v-if="!currentEvent.isCanceled && account.id == creatorId" @click="cancelEvent(currentEvent.id)"
                 class="btn btn-danger w-25 ">Remove
                 Event</button>
             </div>
@@ -68,7 +68,7 @@
                 <p class="ms-3">{{ comment?.body }} </p>
                 <div class="d-flex justify-content-end">
                   <!-- TODO make sure that we are hiding this button from other -->
-                  <div v-if="account.id">
+                  <div v-if="account.id == comment.creatorId">
                     <button @click="deleteEventCommentsById(comment?.id)" class="btn btn-danger ms-3">Delete
                       Comment</button>
                   </div>
