@@ -12,17 +12,19 @@
           </div>
           <img class="pic p-2 " :src="currentEvent.coverImg" alt="">
           <div class=" p-2">
-            <div v-if="account.id" class=" p-2">
-              <button class="mb-2 btn btn-success" :disabled="currentEvent.capacity == 0"
-                @click="createTicket(currentEvent.id)">Attend Event</button>
+            <div v-if="account.id && !currentEvent.isCanceled" class=" p- 2">
+              <div v-if="currentEvent.capacity == 0"></div>
+              <button v-else="account.id && currentEvent.id " @click="createTicket(currentEvent.id)"
+                class="btn btn-success">Attend Event
+              </button>
 
 
-              <div v-if="account.id">
-                <button v-if="!currentEvent.isCanceled" @click="cancelEvent(currentEvent.id)"
-                  class="btn btn-danger w-25 ">Remove
-                  Event</button>
 
-              </div>
+              <button v-if="!currentEvent.isCanceled && account.id" @click="cancelEvent(currentEvent.id)"
+                class="btn btn-danger w-25 ">Remove
+                Event</button>
+
+
             </div>
             <p>Date of event: {{ currentEvent.startDate }}</p>
             <p>Type of event: {{ currentEvent.type }}</p>
@@ -37,24 +39,24 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container Attending-Section">
       <div class="row">
         <div class="col-md-12">
           <!-- TODO 3-4 8:30am -->
           <!-- this will come from the tickets for this event -->
           <h1>Who is attending?:</h1>
-          <div v-for="ticket in tickets"></div>
-          {{ }}
+          <div v-for="ticket in tickets">
+            {{ ticket.profile.name }}
+            <img :src="ticket.profile.picture" alt="">
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="container">
+    <div class="container ">
       <div class="row">
         <div class="mb-3 col-10 ms-5 ">
           <label for="exampleFormControlInput1" class="p-2 fw-bold form-label">Add Comment Here:</label>
-          <!-- TODO make sure to bind the appropriate property here to your ref -->
-          <!-- FIXME  3-4 AT 8:30 [looking for eventId still....added v-model editable.body]-->
           <input type="email" class="mt-1 form-control" v-model="editable.body" id="exampleFormControlInput1"
             placeholder="Your thoughts here!!">
           <div @click="createComment()" class="d-flex justify-content-end">
@@ -98,8 +100,8 @@ import { logger } from '../utils/Logger.js';
 import { AppState } from '../AppState.js';
 import { eventsService } from '../services/EventsService.js';
 import { attendeesService } from '../services/AttendeesService.js';
-import { TowerEvent } from '../models/TowerEvent.js';
 import { router } from '../router.js';
+
 
 
 export default {
@@ -203,6 +205,17 @@ export default {
         } catch (error) {
           logger.log(error)
           Pop.error(error, '[Am I creating a ticket?]')
+        }
+      },
+      async deleteTicket(ticketId) {
+        try {
+          if (await Pop.confirm('Are you sure you DO NOT want to attend?')) {
+            await attendeesService.deleteTicket(ticketId);
+          }
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.error(error.message);
         }
       },
 
