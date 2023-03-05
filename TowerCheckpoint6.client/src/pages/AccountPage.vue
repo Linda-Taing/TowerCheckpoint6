@@ -8,7 +8,7 @@
           <img class="m-2 ticketPic" :src="ticket.event.coverImg" alt="">
           <p> {{ ticket.event.name }}</p>
           <p>{{ ticket.event.location }}</p>
-          <p> {{ ticket.event.startDate }}</p>
+          <!-- <p> {{ ticket.event.startDate }}</p>[[coming in with long date but the homePage has the adjusted and correct date display!]] -->
 
           <div class="d-flex justify-content-end ">
             <button @click="deleteTicket(ticket.id)" class="btn smaller btn-danger m-2 p-2">Delete ticket!</button>
