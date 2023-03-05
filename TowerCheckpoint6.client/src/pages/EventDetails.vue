@@ -17,14 +17,9 @@
               <button v-else="account.id && currentEvent.id " @click="createTicket(currentEvent.id)"
                 class="btn btn-success">Attend Event
               </button>
-
-
-
               <button v-if="!currentEvent.isCanceled && account.id" @click="cancelEvent(currentEvent.id)"
                 class="btn btn-danger w-25 ">Remove
                 Event</button>
-
-
             </div>
             <p>Date of event: {{ currentEvent.startDate }}</p>
             <p>Type of event: {{ currentEvent.type }}</p>
@@ -52,7 +47,6 @@
         </div>
       </div>
     </div>
-
     <div class="container ">
       <div class="row">
         <div class="mb-3 col-10 ms-5 ">
@@ -103,19 +97,16 @@ import { attendeesService } from '../services/AttendeesService.js';
 import { router } from '../router.js';
 
 
-
 export default {
 
 
   setup() {
-    const editable = ref({})
     //  useRoute allows me to access anything in the current URL [👍🏼]
+    const editable = ref({})
     const route = useRoute();
 
     async function getEventById() {
       try {
-        // TODO make sure we are accessing the correct parameter here, refer to what you called in the router.js...whatever comes after the ':' is the name of your param. 
-        // FIXME 3-4 8:30AM [CORRECTED but not responding when I refresh it is still disappearing from page and leaves only the hard code template.]
         const eventId = route.params.eventId;
         await eventsService.getEventById(eventId);
       } catch (error) {
@@ -133,9 +124,6 @@ export default {
       }
     }
 
-    // TODO need to get tickets for this event
-    // refer to 'get event tickets' test in postman for what route to send this request to in the service
-    //FIXME 10:35 [[Checked though again and network not showing tickets drawn for attendees]]
     async function getEventTickets() {
       try {
         const eventId = route.params.eventId;
@@ -152,6 +140,7 @@ export default {
       getEventById();
       getEventTickets();
     });
+
     return {
       editable,
       account: computed(() => AppState.account),
@@ -171,6 +160,7 @@ export default {
           router.push("/")
         }
       },
+
       async deleteEventCommentsById(commentId) {
         try {
           if (await Pop.confirm('Are you sure you want to delete this comment?')) {
@@ -183,6 +173,7 @@ export default {
           logger.log('[ARE YOU DELETED?]')
         }
       },
+
       async createComment() {
         try {
           const formData = editable.value
@@ -195,10 +186,7 @@ export default {
           Pop.error(error)
         }
       },
-      // TODO need a method for creating a ticket, the server will handle the account id, you are responsible for providing the eventId
-      // where can I access the id of the event of whose page I am currently on?
-      // check postman for what type of req. we need to send here
-      // ANCHOR make sure this button for creating a ticket goes away or disables if I have one, the event is cancelled, or capacity == 0
+
       async createTicket() {
         try {
           await attendeesService.createTicket({ eventId: route.params.eventId });
@@ -207,6 +195,7 @@ export default {
           Pop.error(error, '[Am I creating a ticket?]')
         }
       },
+
       async deleteTicket(ticketId) {
         try {
           if (await Pop.confirm('Are you sure you DO NOT want to attend?')) {

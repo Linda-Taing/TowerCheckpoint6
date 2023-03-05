@@ -1,22 +1,16 @@
 <template>
   <h5>Tower Logo Here! (acct)</h5>
 
-
   <div class="container">
     <div class="row">
       <div v-for=" ticket in tickets" class="col">
         <div class="card short">
-          <!-- ANCHOR you may reuse your event component as long as you pass down an event -->
-          <!-- Tickets Are Here! but they come in Raw data. Need to dig through tickets.event -->
-          <!-- <img :src="tickets.events.coverImg" alt=""> 3-4 9:05 [tried to dig in as the example to the one above it will not allow me to dig into that next property. but when I have {{ tickets }} stilL all raw data.] -->
           <img class="m-2 ticketPic" :src="ticket.event.coverImg" alt="">
           <p> {{ ticket.event.name }}</p>
           <p>{{ ticket.event.location }}</p>
           <p> {{ ticket.event.startDate }}</p>
 
           <div class="d-flex justify-content-end ">
-
-            <!-- make sure that you pass down the ticket id here 3-4 9:07 am[[tried to delete and came back with a 400 error saying the ticket is undefined even though I passed the ticket.id as value. It has props and I computed to be able to obtain its properties from Model and AppState and is still not accessible. error: http://localhost:3000/api/tickets/undefined]] -->
             <button @click="deleteTicket(ticket.id)" class="btn smaller btn-danger m-2 p-2">Delete ticket!</button>
           </div>
         </div>
@@ -31,12 +25,12 @@ import { AppState } from '../AppState'
 import { attendeesService } from '../services/AttendeesService.js'
 import { logger } from '../utils/Logger.js'
 import Pop from '../utils/Pop.js'
-import { Ticket } from '../models/Ticket.js'
 
 
 export default {
 
   setup() {
+
     async function getMyTickets() {
       try {
         await attendeesService.getMyTickets()
@@ -48,22 +42,12 @@ export default {
     onMounted(() => {
       getMyTickets();
     });
+
     return {
       events: computed(() => AppState.events),
       attendees: computed(() => AppState.attendees),
       account: computed(() => AppState.account),
       tickets: computed(() => AppState.tickets),
-
-
-      // NOTE 3-4 10am[[moved this method to eventDetails page to be able to draw attendees to page there.]]
-      // async createTicket() {
-      //   try {
-      //     await attendeesService.createTicket({ eventId: route.params.eventId });
-      //   } catch (error) {
-      //     logger.log(error)
-      //     Pop.error(error, '[Am I creating a ticket?]')
-      //   }
-      // },
 
       async deleteTicket(ticketId) {
         try {

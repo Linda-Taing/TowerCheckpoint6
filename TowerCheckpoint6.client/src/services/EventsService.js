@@ -30,10 +30,8 @@ class EventsService {
         AppState.currentEvent = new TowerEvent(res.data)
         return res.data
     }
-
     async cancelEvent(eventId) {
         const res = await api.delete(`api/events/${eventId}`)
-
         logger.log('[CANCELLING EVENT]', res.data)
         const eventIndex = AppState.events.findIndex(e => e.id == eventId)
         if (eventId !== -1) {

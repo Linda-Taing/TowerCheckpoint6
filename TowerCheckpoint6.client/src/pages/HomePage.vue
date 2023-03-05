@@ -53,6 +53,7 @@ export default {
   setup() {
     const route = useRoute()
     const filterType = ref('')
+
     async function getAllEvents() {
       try {
         await eventsService.getAllEvents();
@@ -65,6 +66,7 @@ export default {
     onMounted(() => {
       getAllEvents();
     })
+
     return {
       account: computed(() => AppState.account),
       events: computed(() => {
@@ -78,9 +80,6 @@ export default {
       changeFilterType(type) {
         filterType.value = type
       },
-
-
-
 
       // ---Do Not Pass --- End of Return VVVV //
     }

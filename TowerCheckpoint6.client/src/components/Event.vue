@@ -1,7 +1,4 @@
 <template>
-    <!-- <div class="container">
-        <div class="row"> -->
-    <!-- <router-link :to="{ name: 'EventDetails', params: { eventId: event.id } }"> -->
     <div @click="setCurrentEvent(event.id)" class="selectable card Ecard my-2 ">
         <div v-if="event?.isCanceled">
             <p class="text-danger">Cancelled Event</p>
@@ -19,11 +16,6 @@
             {{ event?.comments }}
         </div>
     </div>
-    <!-- </router-link> -->
-
-
-    <!-- </div>
-    </div> -->
 </template>
 
 
@@ -31,8 +23,6 @@
 import { TowerEvent } from '../models/TowerEvent.js';
 import { useRoute } from 'vue-router';
 import { eventsService } from '../services/EventsService.js';
-import { AppState } from '../AppState.js';
-import { computed } from 'vue';
 import { router } from '../router.js';
 export default {
     props: {
