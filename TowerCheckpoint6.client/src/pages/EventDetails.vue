@@ -17,9 +17,11 @@
               <button v-else="account.id && comment.creatorId" @click="createTicket(currentEvent.id)"
                 class="btn btn-success">Attend Event
               </button>
-              <button v-if="!currentEvent.isCanceled && account.id" @click="cancelEvent(currentEvent.id)"
+              <!-- <div v-if="account.id && !currentEvent.isCanceled"></div> -->
+              <button v-if="!currentEvent.isCanceled" @click="cancelEvent(currentEvent.id)"
                 class="btn btn-danger w-25 ">Remove
                 Event</button>
+
             </div>
             <p class="fw-bold">Date of event: {{ currentEvent.startDate }}</p>
             <p class="fw-bold">Type of event: {{ currentEvent.type }}</p>
