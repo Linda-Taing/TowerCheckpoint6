@@ -14,12 +14,11 @@
           <div class=" p-2">
             <div v-if="account.id && !currentEvent.isCanceled" class=" p- 2">
               <div v-if="currentEvent.capacity == 0"></div>
-              <button v-else="account.id && comment.creatorId" @click="createTicket(currentEvent.id)"
-                class="btn btn-success">Attend Event
+              <button v-if="!isAttending" @click="createTicket(currentEvent.id)" class="btn btn-success">Attend Event
               </button>
               <!-- <div v-if="account.id && !currentEvent.isCanceled"></div> -->
-              <button v-if="!currentEvent.isCanceled" @click="cancelEvent(currentEvent.id)"
-                class="btn btn-danger w-25 ">Remove
+              <button v-if="!currentEvent.isCanceled && currentEvent.creatorId == account.id"
+                @click="cancelEvent(currentEvent.id)" class="btn btn-danger w-25 ">Remove
                 Event</button>
 
             </div>
@@ -36,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="container Attending-Section">
+    <div v-if="tickets" class="container Attending-Section">
       <div class="row">
         <div class="col-md-12 card">
           <!-- TODO 3-4 8:30am -->
@@ -148,6 +147,7 @@ export default {
       comments: computed(() => AppState.comments),
       currentEvent: computed(() => AppState.currentEvent),
       tickets: computed(() => AppState.tickets),
+      isAttending: computed(() => AppState.tickets.find(t => t.accountId == AppState.account.id)),
 
       async cancelEvent(eventId) {
         try {

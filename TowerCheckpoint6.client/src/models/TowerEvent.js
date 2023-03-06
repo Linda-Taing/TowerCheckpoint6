@@ -1,6 +1,7 @@
 export class TowerEvent {
     constructor(data) {
         this.id = data.id
+        this.creatorId = data.creatorId
         this.comment = data.comment
         this.isCanceled = data.isCanceled
         this.name = data.name

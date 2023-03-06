@@ -1,14 +1,14 @@
 <template>
   <h1 class="bg-dark p-2">Tower: Acct Page</h1>
-
+  <!-- <div v-if="tickets"> -->
   <div class="container">
     <div class="row d-flex my-3 p-3 justify-content-center">
       <div class="fs-3">Your Event Tickets Here:</div>
       <div v-for=" ticket in tickets" class="col-md-7">
         <div class="card my-3 short">
-          <img class="m-2 ticketPic" :src="ticket.event.coverImg" alt="">
-          <p class="ms-2"> {{ ticket.event.name }}</p>
-          <p class="ms-2">{{ ticket.event.location }}</p>
+          <img class="m-2 ticketPic" :src="ticket.event?.coverImg" alt="">
+          <p class="ms-2"> {{ ticket.event?.name }}</p>
+          <p class="ms-2">{{ ticket.event?.location }}</p>
           <!-- <p> {{ ticket.event.startDate }}</p>[[coming in with long date but the homePage has the adjusted and correct date display!]] -->
           <div class="d-flex justify-content-end ">
             <button @click="deleteTicket(ticket.id)" class="btn smaller btn-danger m-2 p-2">Delete ticket!</button>
@@ -17,6 +17,7 @@
       </div>
     </div>
   </div>
+  <!-- </div> -->
 </template>
 
 <script>

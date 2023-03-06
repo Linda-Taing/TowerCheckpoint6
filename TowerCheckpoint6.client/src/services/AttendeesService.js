@@ -21,6 +21,7 @@ class AttendeesService {
     async createTicket(ticketData) {
         const res = await api.post('api/tickets', ticketData)
         logger.log('creating ticket', res.data)
+        AppState.tickets.push(new Ticket(res.data))
     }
 
     async deleteTicket(ticketId) {
