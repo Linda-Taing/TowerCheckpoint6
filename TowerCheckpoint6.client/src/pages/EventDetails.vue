@@ -1,6 +1,6 @@
 <template>
   <section v-if="currentEvent">
-    <h5>Tower Logo here on the Deets Page</h5>
+    <h1 class="bg-dark p-2">Tower: Event Details</h1>
     <div class="container">
       <div class="row">
         <div class="col-md-12 card">
@@ -36,13 +36,13 @@
     </div>
     <div class="container Attending-Section">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 card">
           <!-- TODO 3-4 8:30am -->
           <!-- this will come from the tickets for this event -->
           <h1>Who is attending?:</h1>
-          <div v-for="ticket in tickets">
+          <div class="p-3 " v-for="ticket in tickets">
             {{ ticket.profile.name }}
-            <img :src="ticket.profile.picture" alt="">
+            <img class="rounded-circle" height="50" width="50" :src="ticket.profile.picture" alt="">
           </div>
         </div>
       </div>
@@ -50,6 +50,7 @@
     <div class="container ">
       <div class="row">
         <div class="mb-3 col-10 ms-5 ">
+          <h1>Comments:</h1>
           <label for="exampleFormControlInput1" class="p-2 fw-bold form-label">Add Comment Here:</label>
           <input type="email" class="mt-1 form-control" v-model="editable.body" id="exampleFormControlInput1"
             placeholder="Your thoughts here!!">
@@ -58,20 +59,17 @@
           </div>
         </div>
         <div v-for="comment in comments" class="col-md-12">
-          <h1>Comments:</h1>
-          <div class="card rounded-0">
-            <div>
-              <div class="mt-3 p-2 card rounded-0">
-                <img class="p-3 rounded-circle" title="Profile Picture" height="100" width="100"
-                  :src="comment.creator.picture" alt="">
-                <p class="p-3">{{ comment?.creator.name }}</p>
-                <p class="ms-3">{{ comment?.body }} </p>
-                <div class="d-flex justify-content-end">
-                  <!-- TODO make sure that we are hiding this button from other -->
-                  <div v-if="account.id == comment.creatorId">
-                    <button @click="deleteEventCommentsById(comment?.id)" class="btn btn-danger ms-3">Delete
-                      Comment</button>
-                  </div>
+          <div>
+            <div class="mt-3 p-2 card rounded-0">
+              <img class="p-3 rounded-circle" title="Profile Picture" height="100" width="100"
+                :src="comment.creator.picture" alt="">
+              <p class="p-3">{{ comment?.creator.name }}</p>
+              <p class="ms-3">{{ comment?.body }} </p>
+              <div class="d-flex justify-content-end">
+                <!-- TODO make sure that we are hiding this button from other -->
+                <div v-if="account.id == comment.creatorId">
+                  <button @click="deleteEventCommentsById(comment?.id)" class="btn btn-danger ms-3">Delete
+                    Comment</button>
                 </div>
               </div>
             </div>
@@ -79,6 +77,7 @@
         </div>
       </div>
     </div>
+
   </section>
   <section class="loading" v-else>
     <h1 class="text-center">loading...</h1>

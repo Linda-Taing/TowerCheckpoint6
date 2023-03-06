@@ -24,6 +24,7 @@
                   Edit Profile Picture
                 </button>
                 <Modal id="editProfile" modal-title="Edit Profile Picture">
+
                 </Modal>
               </div>
             </div>

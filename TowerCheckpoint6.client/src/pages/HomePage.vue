@@ -1,6 +1,6 @@
 <template>
-  <div class="p-2 d-flex justify-content-between">
-    <h5>Tower Logo Here! (home)</h5>
+  <div class="p-2 d-flex justify-content-between bg-dark">
+    <h1>Tower</h1>
     <button v-if="account.id" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#test-modal">
       Create Event
     </button>

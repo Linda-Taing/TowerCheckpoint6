@@ -1,15 +1,15 @@
 <template>
-  <h5>Tower Logo Here! (acct)</h5>
+  <h1 class="bg-dark p-2">Tower: Acct Page</h1>
 
   <div class="container">
-    <div class="row">
-      <div v-for=" ticket in tickets" class="col">
-        <div class="card short">
+    <div class="row d-flex my-3 p-3 justify-content-center">
+      <div class="fs-3">Your Event Tickets Here:</div>
+      <div v-for=" ticket in tickets" class="col-md-7">
+        <div class="card my-3 short">
           <img class="m-2 ticketPic" :src="ticket.event.coverImg" alt="">
-          <p> {{ ticket.event.name }}</p>
-          <p>{{ ticket.event.location }}</p>
+          <p class="ms-2"> {{ ticket.event.name }}</p>
+          <p class="ms-2">{{ ticket.event.location }}</p>
           <!-- <p> {{ ticket.event.startDate }}</p>[[coming in with long date but the homePage has the adjusted and correct date display!]] -->
-
           <div class="d-flex justify-content-end ">
             <button @click="deleteTicket(ticket.id)" class="btn smaller btn-danger m-2 p-2">Delete ticket!</button>
           </div>
@@ -70,7 +70,7 @@ export default {
 
 <style scoped>
 .short {
-  width: 15 em;
+  width: 20 em;
 }
 
 .smaller {
