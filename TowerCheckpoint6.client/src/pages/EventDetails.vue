@@ -6,7 +6,7 @@
         <div class="col-md-12 card">
           <div class="card-title">
             <div v-if="currentEvent.isCanceled">
-              <p class="text-danger">Cancelled Event</p>
+              <p class="text-danger fs-1 text-center">Cancelled Event</p>
             </div>
             <h2>{{ currentEvent.name }}</h2>
           </div>
@@ -21,13 +21,13 @@
                 class="btn btn-danger w-25 ">Remove
                 Event</button>
             </div>
-            <p>Date of event: {{ currentEvent.startDate }}</p>
-            <p>Type of event: {{ currentEvent.type }}</p>
+            <p class="fw-bold">Date of event: {{ currentEvent.startDate }}</p>
+            <p class="fw-bold">Type of event: {{ currentEvent.type }}</p>
             <p class="fw-bold pb-0">Description:
             <p class="pt-0">{{ currentEvent.description }}</p>
             </p>
             <div v-if="currentEvent.capacity == 0">
-              <p class="text-danger"> Sold-Out</p>
+              <p class="text-danger fs-1 text-center"> Sold-Out</p>
             </div>
             <p class="fw-bold">capacity: {{ currentEvent.capacity }}</p>
           </div>

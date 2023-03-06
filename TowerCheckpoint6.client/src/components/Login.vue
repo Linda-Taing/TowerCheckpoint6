@@ -19,13 +19,6 @@
                 logout
               </div>
               <div>
-                <button class="w-100 border selectable edit  p-2 rounded-top text-center border-0" data-bs-toggle="modal"
-                  data-bs-target="#editProfile" @click="showModal = true">
-                  Edit Profile Picture
-                </button>
-                <Modal id="editProfile" modal-title="Edit Profile Picture">
-
-                </Modal>
               </div>
             </div>
           </div>

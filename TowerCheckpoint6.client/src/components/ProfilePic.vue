@@ -1,11 +1,6 @@
 <template>
-    <form @submit.prevent="createEvent()">
+    <form @submit.prevent="createProfilePic()">
         <div class="modal-body">
-            <div class="mb-3">
-                <label for="name" class="form-label">Event Name</label>
-                <input v-model="editable.name" required type="text" class="form-control" id="name"
-                    aria-describedby="emailHelp">
-            </div>
             <div class="mb-3">
                 <label for="coverImg" class="form-label">Event Image</label>
                 <input v-model="editable.coverImg" required type="url" class="form-control" id="coverImg"
@@ -21,11 +16,25 @@
 
 
 <script>
+import { ref } from 'vue';
+import { router } from '../router.js';
+import { accountService } from '../services/AccountService.js';
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
 export default {
     setup() {
-        return {}
+        const editable = ref({})
+        return {
+            editable
+
+
+
+
+            // <<<<<<<<<<<<----------end of return--------------->>>>>>>>
+        }
     }
 }
+
 </script>
 
 

@@ -1,13 +1,13 @@
 <template>
     <div @click="setCurrentEvent(event.id)" class="selectable card Ecard my-2 ">
         <div v-if="event?.isCanceled">
-            <p class="text-danger">Cancelled Event</p>
+            <p class="text-danger fs-3 text-center fw-bold">Cancelled Event</p>
+        </div>
+        <div v-if="event?.capacity == 0">
+            <p class="text-danger fs-3 text-center fw-bold"> Sold-Out</p>
         </div>
         <img class="img-fluid" :src="event?.coverImg" :alt="event?.name">
         <div class="card-body">
-            <div v-if="event?.capacity == 0">
-                <p class="text-danger"> Sold-Out</p>
-            </div>
             <p>{{ event?.name }}</p>
             <p>{{ event.type }}</p>
             <p>{{ event?.startDate }}</p>
