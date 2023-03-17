@@ -11,7 +11,6 @@ class EventsService {
 
     async getAllEvents() {
         const res = await api.get('api/events')
-        // console.log(res.data)
         logger.log('[GETTING EVENTS]', res.data)
         const events = res.data.map(e => new TowerEvent(e))
         AppState.events = events

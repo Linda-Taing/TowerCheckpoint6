@@ -34,7 +34,6 @@ export default {
         const route = useRoute()
         return {
             setCurrentEvent() {
-                console.log(props);
                 eventsService.setCurrentEvent(props.event)
                 router.push({ name: 'EventDetails', params: { eventId: props.event.id } })
             },
