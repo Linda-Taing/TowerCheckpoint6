@@ -1,5 +1,5 @@
 <template>
-    <div @click="setCurrentEvent(event.id)" class="selectable card Ecard my-2 ">
+    <div @click="setCurrentEvent(event.id)" class="col-md-12 selectable card my-2 ">
         <div v-if="event?.isCanceled">
             <p class="text-danger fs-3 text-center fw-bold">Cancelled Event</p>
         </div>
@@ -47,10 +47,10 @@ export default {
 
 
 <style lang="scss" scoped>
-.ECard {
-    height: 40vh;
+.card {
+    height: 30em;
     overflow: hidden;
-    text-shadow: 0 0 4px black;
+    text-shadow: 0 0 1px black;
     letter-spacing: .07rem;
 
     img {

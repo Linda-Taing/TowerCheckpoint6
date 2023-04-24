@@ -34,7 +34,7 @@
           <h2>Events </h2>
         </div>
       </div>
-      <div v-for="eve in events" class="col-md-3">
+      <div v-for="eve in events" class="col-md-4">
         <Event :event="eve" />
       </div>
     </div>
